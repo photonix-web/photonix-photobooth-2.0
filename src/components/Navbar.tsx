@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/photonix-logo.png";
-import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Home", path: "/" },

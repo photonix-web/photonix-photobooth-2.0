@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Oswald", "sans-serif"],
-        body: ["Open Sans", "sans-serif"],
+        heading: ["Moon 2.0", "sans-serif"],
+        body: ["Garet", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

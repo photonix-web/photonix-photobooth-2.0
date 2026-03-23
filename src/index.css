@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/garet');
+@import url('https://fonts.cdnfonts.com/css/moon-20');
 
 @tailwind base;
 @tailwind components;
@@ -15,8 +16,8 @@
     --popover: 0 0% 11%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 0 72% 51%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 7%;
 
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 95%;
@@ -24,29 +25,29 @@
     --muted: 0 0% 18%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 0 72% 51%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 0 72% 51%;
+    --ring: 0 0% 100%;
 
     --radius: 0.5rem;
 
-    --font-heading: 'Oswald', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --font-heading: 'Moon 2.0', sans-serif;
+    --font-body: 'Garet', sans-serif;
 
     --sidebar-background: 0 0% 10%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 72% 51%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 7%;
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 0 72% 51%;
+    --sidebar-ring: 0 0% 100%;
   }
 }
 
@@ -70,10 +71,15 @@
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(0 72% 51%), hsl(0 72% 65%));
+    background-image: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 80%));
   }
 
   .section-padding {
     @apply px-6 py-20 md:px-12 lg:px-24;
+  }
+
+  .font-brand {
+    font-family: 'Moon 2.0', sans-serif;
+    font-weight: 700;
   }
 }

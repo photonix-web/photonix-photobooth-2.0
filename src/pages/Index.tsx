@@ -1,16 +1,186 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { useState } from "react";
+import Layout from "@/components/Layout";
+import heroImage from "@/assets/photobooth-hero.png";
+import event1 from "@/assets/event-1.jpg";
+import event2 from "@/assets/event-2.jpg";
+import event3 from "@/assets/event-3.jpg";
+import { Button } from "@/components/ui/button";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const events = [
+  { img: event1, title: "University Intramural Meet", desc: "Fun-filled photo sessions with students" },
+  { img: event2, title: "Wedding Celebrations", desc: "Capturing love stories beautifully" },
+  { img: event3, title: "Corporate Year-End Party", desc: "Making corporate events memorable" },
+];
+
+const testimonials = [
+  { name: "Shane", text: "I had such a great time! First of all, super accommodating ang mga tig handle and comfortable kaayo sila ka talk. Budget-friendly with nice quality. Makagwapa jud kaayo ilang booth guys 🤩" },
+  { name: "Ruby Pearl", text: "Thank you so much for the fantastic photobooth experience at our wedding day! Everyone loved the fun props and the high-quality photos. Your team was friendly and made everything run smoothly. 🫶🏼" },
+  { name: "Eina", text: "As one of the organizers, it makes me happy seeing our students enjoy having their photos taken here in photonix. The staff are very kind and considerate to each of our requests. 🩷" },
+  { name: "Kin", text: "Photos turned out vibrant and clear, lots of frames to choose from at an affordable price. Friendly staff and lots of props to make your photos more fun. Would recommend!" },
+  { name: "Iris", text: "The quality of the pictures was great for a student-friendly price. Thank you for capturing the moment with us with your friendly service. Bless your business! 🫶" },
+  { name: "Saeed", text: "Huge thanks for making an unforgettable night! Your photobooth's creativity, quality and fun factors exceeded our expectations! Your team's professionalism made every guest feel special. 🫶🏻" },
+];
+
+const Index = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const next = () => setCurrentTestimonial((p) => (p + 1) % testimonials.length);
+  const prev = () => setCurrentTestimonial((p) => (p - 1 + testimonials.length) % testimonials.length);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <Layout>
+      {/* Hero */}
+      <section className="relative min-h-[90vh] flex items-center section-padding overflow-hidden">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="font-heading text-5xl md:text-7xl font-bold leading-tight">
+              <span className="text-primary">photonix</span>
+              <br />
+              <span className="text-foreground text-2xl md:text-3xl tracking-[0.4em]">PHOTOBOOTH</span>
+            </h1>
+            <p className="text-muted-foreground text-lg mt-6 max-w-md leading-relaxed">
+              Your mobile pop-up photobooth — making your events memorable.
+            </p>
+            <div className="flex gap-4 mt-8">
+              <Button asChild size="lg" className="font-heading tracking-widest">
+                <Link to="/book">BOOK NOW</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="font-heading tracking-widest border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Link to="/services">OUR SERVICES</Link>
+              </Button>
+            </div>
+            <div className="flex gap-6 mt-8 text-sm text-muted-foreground">
+              <a href="https://www.facebook.com/photonixphotobooth" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">facebook.com/photonixphotobooth</a>
+              <a href="https://www.instagram.com/photonixbooth/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@photonixbooth</a>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex justify-center"
+          >
+            <img src={heroImage} alt="Photonix Photobooth setup" width={600} height={450} className="max-w-full h-auto drop-shadow-2xl" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Events */}
+      <section className="section-padding bg-secondary">
+        <div className="container mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-heading text-4xl font-bold text-center mb-4"
+          >
+            FEATURED <span className="text-primary">EVENTS</span>
+          </motion.h2>
+          <p className="text-center text-muted-foreground mb-12">Pop-ups and events we've been part of</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {events.map((event, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                className="group rounded-lg overflow-hidden bg-card border border-border hover:border-primary transition-colors"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={event.img}
+                    alt={event.title}
+                    loading="lazy"
+                    width={800}
+                    height={600}
+                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-heading text-lg font-semibold">{event.title}</h3>
+                  <p className="text-muted-foreground text-sm mt-2">{event.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <a
+              href="https://www.facebook.com/photonixphotobooth"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline font-heading tracking-widest text-sm"
+            >
+              CHECK MORE EVENTS ON OUR FACEBOOK PAGE →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="section-padding">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="font-heading text-4xl font-bold text-center mb-4">
+            <span className="text-primary">TESTIMONIALS</span>
+          </h2>
+          <p className="text-center text-muted-foreground mb-12">Here's what our customers and clients have to say</p>
+
+          <div className="relative bg-card border border-border rounded-lg p-8 md:p-12 min-h-[250px] flex flex-col items-center justify-center text-center">
+            <Quote className="text-primary mb-4" size={36} />
+            <motion.p
+              key={currentTestimonial}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="text-foreground leading-relaxed text-lg italic"
+            >
+              "{testimonials[currentTestimonial].text}"
+            </motion.p>
+            <p className="mt-6 font-heading text-primary tracking-widest text-sm">
+              — {testimonials[currentTestimonial].name}
+            </p>
+
+            <div className="flex gap-4 mt-8">
+              <button onClick={prev} className="p-2 rounded-full border border-border hover:border-primary hover:text-primary transition-colors">
+                <ChevronLeft size={20} />
+              </button>
+              <button onClick={next} className="p-2 rounded-full border border-border hover:border-primary hover:text-primary transition-colors">
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            <div className="flex gap-2 mt-4">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentTestimonial(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${i === currentTestimonial ? "bg-primary" : "bg-muted"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-primary text-primary-foreground text-center">
+        <div className="container mx-auto">
+          <h2 className="font-heading text-4xl font-bold mb-4">READY TO BOOK YOUR EVENT?</h2>
+          <p className="mb-8 text-primary-foreground/80">Let's make memories together!</p>
+          <Button asChild size="lg" variant="outline" className="font-heading tracking-widest border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Link to="/book">BOOK NOW</Link>
+          </Button>
+        </div>
+      </section>
+    </Layout>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;

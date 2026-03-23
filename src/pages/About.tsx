@@ -14,7 +14,7 @@ const About = () => (
           ABOUT <span className="text-primary">US</span>
         </motion.h1>
         <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
-          Get to know the story behind Photonix Photobooth
+          Get to know the story behind Photonix
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -32,7 +32,7 @@ const About = () => (
                 Our mission is simple: to make your events unforgettable while providing high-quality service at rates that won't break the bank.
               </p>
               <p>
-                Based in Tagum City, we're proud to bring joy and creativity to events in our local area and beyond. We're DTI-registered and operate with a business permit from the city, maintaining a standard of quality you can trust.
+                Based in Tagum City, we're proud to bring joy and creativity to events in our local area and beyond. We're DTI & BIR registered and operate with a business permit from the city, maintaining a standard of quality you can trust.
               </p>
               <p>
                 Whether it's a university event, a wedding, or a simple gathering, we're here to help you capture every special moment in style. Let's make memories together!

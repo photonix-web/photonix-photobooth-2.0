@@ -89,8 +89,8 @@ const Index = () => {
               >
                 <div className="overflow-hidden">
                   <img
-                    src={events.img}
-                    alt={events.title}
+                    src={event.img}
+                    alt={event.title}
                     loading="lazy"
                     width={800}
                     height={600}
@@ -98,8 +98,8 @@ const Index = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-heading text-lg font-semibold">{events.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-2">{events.desc}</p>
+                  <h3 className="font-heading text-lg font-semibold">{event.title}</h3>
+                  <p className="text-muted-foreground text-sm mt-2">{event.desc}</p>
                 </div>
               </motion.div>
             ))}

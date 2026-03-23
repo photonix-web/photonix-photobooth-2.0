@@ -170,11 +170,11 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-primary text-primary-foreground text-center">
+      <section className="section-padding bg-foreground text-background text-center">
         <div className="container mx-auto">
           <h2 className="font-heading text-4xl font-bold mb-4">READY TO BOOK YOUR EVENT?</h2>
-          <p className="mb-8 text-primary-foreground/80">Let's make memories together!</p>
-          <Button asChild size="lg" variant="outline" className="font-heading tracking-widest border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+          <p className="mb-8 text-background/70">Let's make memories together!</p>
+          <Button asChild size="lg" className="font-heading tracking-widest bg-background text-foreground hover:bg-background/90">
             <Link to="/book">BOOK NOW</Link>
           </Button>
         </div>

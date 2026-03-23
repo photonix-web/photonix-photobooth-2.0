@@ -5,9 +5,9 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import heroImage from "@/assets/photobooth-hero.png";
 import logo from "@/assets/photonix-logo.png";
-import event1 from "@/assets/event-1.jpg";
-import event2 from "@/assets/event-2.jpg";
-import event3 from "@/assets/event-3.jpg";
+import event1 from "@/assets/schools.png";
+import event2 from "@/assets/weddings.png";
+import event3 from "@/assets/corporates.png";
 import { Button } from "@/components/ui/button";
 
 const events = [

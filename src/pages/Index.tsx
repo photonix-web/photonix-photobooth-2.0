@@ -35,10 +35,9 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section
-        className="relative min-h-[90vh] flex items-center section-padding overflow-hidden bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        className="relative min-h-[70vh] flex items-center section-padding overflow-hidden"
       >
-        <div className="absolute inset-0 bg-background/60" />
+        <img src={heroImage} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -46,7 +45,7 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className="max-w-xl"
           >
-            <img src={logo} alt="Photonix Photobooth" className="h-16 md:h-20 mb-6" />
+            <img src={logo} alt="Photonix Photobooth" className="h-28 md:h-36 mb-6" />
             <p className="text-muted-foreground text-lg max-w-md leading-relaxed">
               Your mobile pop-up photobooth — making your events memorable.
             </p>

@@ -8,9 +8,29 @@ const booths = [
     name: "Basic",
     subtitle: "Standard Boxed Photobooth",
     prices: [
-      { format: "4R Style (4\" × 6\")", price: "₱10,000" },
-      { format: "Photo-strip", price: "₱10,500" },
-      { format: "5 Frames", price: "₱11,000" },
+      { format: "4R Style (4\" × 6\")", price: "₱4,000" },
+      { format: "Photostrip / Polaroid", price: "₱4,500" },
+      { format: "5 Frames", price: "₱5,000" },
+    ],
+    features: [
+      "2-Hour photo session",
+      "Unlimited photo shoots",
+      "1 print-out per session",
+      "Live interactive touch operation",
+      "Customized layouts/templates",
+      "Photo Standee Included",
+      "Photobooth Attendant available",
+      "Free use of sanitized props",
+      "Logistics, Set-up & Takedown",
+    ],
+  },
+  {
+    name: "Curtain",
+    subtitle: "Curtain Photobooth",
+    prices: [
+      { format: "4R Style (4\" × 6\")", price: "₱6,000" },
+      { format: "Photostrip / Polaroid", price: "₱6,500" },
+      { format: "5 Frames", price: "₱7,000" },
     ],
     features: [
       "2-Hour photo session",
@@ -26,12 +46,12 @@ const booths = [
   },
   {
     name: "Classic",
-    subtitle: "Curtain Wide-Angle Photobooth",
+    subtitle: "Classic Wide-Angle Photobooth",
     popular: true,
     prices: [
-      { format: "4R Style (4\" × 6\")", price: "₱10,500" },
-      { format: "Photo-strip", price: "₱11,000" },
-      { format: "5 Frames", price: "₱11,500" },
+      { format: "4R Style (4\" × 6\")", price: "₱10,000" },
+      { format: "Photostrip / Polaroid", price: "₱10,500" },
+      { format: "5 Frames", price: "₱11,000" },
     ],
     features: [
       "2-Hour photo session",
@@ -51,7 +71,7 @@ const booths = [
     subtitle: "High-Angle Photobooth",
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱12,000" },
-      { format: "Photo-strip", price: "₱12,500" },
+      { format: "Photostrip / Polaroid", price: "₱12,500" },
       { format: "5 Frames", price: "₱13,000" },
     ],
     features: [
@@ -83,14 +103,14 @@ const Services = () => (
           Choose the perfect photobooth package for your event
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {booths.map((booth, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
+              transition={{ delay: i * 0.1 }}
               className={`relative bg-card border rounded-lg overflow-hidden ${
                 booth.popular ? "border-primary ring-2 ring-primary" : "border-border"
               }`}
@@ -100,37 +120,34 @@ const Services = () => (
                   MOST POPULAR
                 </div>
               )}
-              <div className="p-8">
-                <h3 className="font-heading text-2xl font-bold">{booth.name}</h3>
+              <div className="p-6">
+                <h3 className="font-heading text-xl font-bold">{booth.name}</h3>
                 <p className="text-muted-foreground text-sm mt-1">{booth.subtitle}</p>
 
-                {/* Prices */}
-                <div className="mt-6 space-y-3">
+                <div className="mt-5 space-y-2">
                   {booth.prices.map((price, j) => (
                     <div key={j} className="flex justify-between items-center py-2 border-b border-border">
-                      <span className="text-sm text-muted-foreground">{price.format}</span>
-                      <span className="font-heading font-bold text-primary text-lg">{price.price}</span>
+                      <span className="text-xs text-muted-foreground">{price.format}</span>
+                      <span className="font-heading font-bold text-primary text-base">{price.price}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Features */}
-                <ul className="mt-6 space-y-2">
+                <ul className="mt-5 space-y-1.5">
                   {booth.features.map((f, j) => (
-                    <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary mt-1">✓</span> {f}
+                    <li key={j} className="text-xs text-muted-foreground flex items-start gap-2">
+                      <span className="text-primary mt-0.5">✓</span> {f}
                     </li>
                   ))}
                 </ul>
 
-                {/* Add-ons */}
-                <div className="mt-6 pt-4 border-t border-border text-xs text-muted-foreground space-y-1">
+                <div className="mt-5 pt-3 border-t border-border text-xs text-muted-foreground space-y-1">
                   <p>Extension Rate per hour: ₱2,500</p>
                   <p>Add Unli Reprint: ₱2,000</p>
                   <p className="italic mt-2">*Prices subject to change without prior notice.</p>
                 </div>
 
-                <Button asChild className="w-full mt-6 font-heading tracking-widest">
+                <Button asChild className="w-full mt-5 font-heading tracking-widest text-sm">
                   <Link to="/book">BOOK THIS PACKAGE</Link>
                 </Button>
               </div>

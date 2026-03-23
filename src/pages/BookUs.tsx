@@ -1,44 +1,67 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
-import { ChevronRight, Clock, CalendarDays } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { ChevronRight, CalendarDays, X } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const timeSlots = [
-  "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-  "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM",
-  "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM",
-];
+const boothOptions = ["Basic", "Curtain", "Classic", "High-Angle"];
+const packageTypes = ["4R", "Photostrip", "Polaroid", "5 Frames"];
+const venueOptions = ["Indoor", "Outdoor"];
 
-const boothOptions = ["Basic (Standard Boxed)", "Classic (Curtain Wide-Angle)", "High-Angle"];
+const generateBookingNumber = () => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "PTX-";
+  for (let i = 0; i < 6; i++) result += chars.charAt(Math.floor(Math.random() * chars.length));
+  return result;
+};
 
 const BookUs = () => {
-  const { toast } = useToast();
-  const [step, setStep] = useState(1);
   const [date, setDate] = useState<Date | undefined>();
-  const [time, setTime] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", phone: "", booth: "", eventType: "", notes: "" });
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [bookingNumber, setBookingNumber] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    booth: "",
+    packageType: "",
+    eventName: "",
+    location: "",
+    startTime: "",
+    venue: "",
+    paxGuest: "",
+    themeMotif: "",
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Booking Request Submitted!",
-      description: `We'll confirm your booking for ${date?.toLocaleDateString()} at ${time}. Check your email for confirmation.`,
-    });
-    setStep(1);
+    const num = generateBookingNumber();
+    setBookingNumber(num);
+    setShowConfirmation(true);
+  };
+
+  const closeConfirmation = () => {
+    setShowConfirmation(false);
     setDate(undefined);
-    setTime("");
-    setForm({ name: "", email: "", phone: "", booth: "", eventType: "", notes: "" });
+    setForm({
+      name: "", email: "", phone: "", booth: "", packageType: "",
+      eventName: "", location: "", startTime: "", venue: "", paxGuest: "", themeMotif: "",
+    });
   };
 
   return (
     <Layout>
       <section className="section-padding">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-3xl">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -47,46 +70,70 @@ const BookUs = () => {
             BOOK <span className="text-primary">US</span>
           </motion.h1>
           <p className="text-center text-muted-foreground mb-12">
-            Schedule your event photobooth in 3 easy steps
+            Fill out the form below to book your photobooth experience
           </p>
 
-          {/* Steps indicator */}
-          <div className="flex items-center justify-center gap-4 mb-12">
-            {[
-              { num: 1, label: "Select Date" },
-              { num: 2, label: "Choose Time" },
-              { num: 3, label: "Your Details" },
-            ].map((s, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-heading text-sm ${
-                    step >= s.num
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {s.num}
-                </div>
-                <span className="hidden md:inline text-sm text-muted-foreground font-heading tracking-widest">
-                  {s.label}
-                </span>
-                {i < 2 && <ChevronRight size={16} className="text-muted-foreground mx-2" />}
-              </div>
-            ))}
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-5 bg-card border border-border rounded-lg p-6 md:p-10">
+            {/* Name */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">NAME *</label>
+              <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your full name" required className="bg-background border-border" />
+            </div>
 
-          {/* Step 1: Calendar */}
-          {step === 1 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center gap-2 mb-6 text-muted-foreground">
-                <CalendarDays size={20} className="text-primary" />
-                <span className="font-heading tracking-widest text-sm">SELECT YOUR EVENT DATE</span>
+            {/* Email */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EMAIL *</label>
+              <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" required className="bg-background border-border" />
+            </div>
+
+            {/* Contact Number */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">CONTACT NUMBER *</label>
+              <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+63 XXX XXX XXXX" required className="bg-background border-border" />
+            </div>
+
+            {/* Event Package & Package Type */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT PACKAGE *</label>
+                <Select value={form.booth} onValueChange={(v) => setForm({ ...form, booth: v })}>
+                  <SelectTrigger className="bg-background border-border">
+                    <SelectValue placeholder="Select package" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {boothOptions.map((o) => (
+                      <SelectItem key={o} value={o}>{o}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-              <div className="bg-card border border-border rounded-lg p-6">
+              <div>
+                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">PACKAGE TYPE *</label>
+                <Select value={form.packageType} onValueChange={(v) => setForm({ ...form, packageType: v })}>
+                  <SelectTrigger className="bg-background border-border">
+                    <SelectValue placeholder="Select type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {packageTypes.map((o) => (
+                      <SelectItem key={o} value={o}>{o}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Event Name */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT NAME (TO BE ADDED IN DESIGN FRAME) *</label>
+              <Input value={form.eventName} onChange={(e) => setForm({ ...form, eventName: e.target.value })} placeholder="e.g. John & Jane's Wedding" required className="bg-background border-border" />
+            </div>
+
+            {/* Date */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2 flex items-center gap-2">
+                <CalendarDays size={16} className="text-primary" /> DATE *
+              </label>
+              <div className="bg-background border border-border rounded-lg p-4 inline-block">
                 <Calendar
                   mode="single"
                   selected={date}
@@ -95,115 +142,95 @@ const BookUs = () => {
                   className="pointer-events-auto"
                 />
               </div>
-              <Button
-                onClick={() => date && setStep(2)}
-                disabled={!date}
-                size="lg"
-                className="mt-8 font-heading tracking-widest"
-              >
-                CONTINUE <ChevronRight size={16} className="ml-2" />
-              </Button>
-            </motion.div>
-          )}
+              {date && (
+                <p className="text-sm text-muted-foreground mt-2">
+                  Selected: {date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+                </p>
+              )}
+            </div>
 
-          {/* Step 2: Time */}
-          {step === 2 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-center"
-            >
-              <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                <Clock size={20} className="text-primary" />
-                <span className="font-heading tracking-widest text-sm">SELECT START TIME</span>
-              </div>
-              <p className="text-muted-foreground text-sm mb-6">{date?.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</p>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-3 w-full max-w-lg">
-                {timeSlots.map((slot) => (
-                  <button
-                    key={slot}
-                    onClick={() => setTime(slot)}
-                    className={`py-3 px-4 rounded-lg border text-sm font-heading tracking-wider transition-colors ${
-                      time === slot
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-card text-foreground hover:border-primary"
-                    }`}
-                  >
-                    {slot}
-                  </button>
-                ))}
-              </div>
-              <div className="flex gap-4 mt-8">
-                <Button variant="outline" onClick={() => setStep(1)} className="font-heading tracking-widest border-border">
-                  BACK
-                </Button>
-                <Button onClick={() => time && setStep(3)} disabled={!time} className="font-heading tracking-widest">
-                  CONTINUE <ChevronRight size={16} className="ml-2" />
-                </Button>
-              </div>
-            </motion.div>
-          )}
+            {/* Event Location */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT LOCATION ADDRESS *</label>
+              <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="Full address of the venue" required className="bg-background border-border" />
+            </div>
 
-          {/* Step 3: Form */}
-          {step === 3 && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <div className="bg-card border border-border rounded-lg p-4 mb-8 flex flex-wrap gap-6 justify-center text-sm">
-                <span className="text-muted-foreground">📅 {date?.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</span>
-                <span className="text-muted-foreground">🕐 {time}</span>
+            {/* Time to Start & Venue */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">TIME TO START BOOTH *</label>
+                <Input type="time" value={form.startTime} onChange={(e) => setForm({ ...form, startTime: e.target.value })} required className="bg-background border-border" />
               </div>
-
-              <form onSubmit={handleSubmit} className="space-y-5 max-w-lg mx-auto">
-                <div>
-                  <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">FULL NAME *</label>
-                  <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your full name" required className="bg-card border-border" />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EMAIL *</label>
-                  <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" required className="bg-card border-border" />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">PHONE</label>
-                  <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+63 XXX XXX XXXX" className="bg-card border-border" />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">BOOTH PACKAGE *</label>
-                  <select
-                    value={form.booth}
-                    onChange={(e) => setForm({ ...form, booth: e.target.value })}
-                    required
-                    className="w-full rounded-md border border-border bg-card text-foreground px-3 py-2 text-sm"
-                  >
-                    <option value="">Select a package</option>
-                    {boothOptions.map((o) => (
-                      <option key={o} value={o}>{o}</option>
+              <div>
+                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">VENUE *</label>
+                <Select value={form.venue} onValueChange={(v) => setForm({ ...form, venue: v })}>
+                  <SelectTrigger className="bg-background border-border">
+                    <SelectValue placeholder="Select venue type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {venueOptions.map((o) => (
+                      <SelectItem key={o} value={o}>{o}</SelectItem>
                     ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT TYPE</label>
-                  <Input value={form.eventType} onChange={(e) => setForm({ ...form, eventType: e.target.value })} placeholder="e.g. Wedding, Birthday, Corporate" className="bg-card border-border" />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">ADDITIONAL NOTES</label>
-                  <Textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Any special requests or details..." rows={3} className="bg-card border-border" />
-                </div>
-                <div className="flex gap-4">
-                  <Button type="button" variant="outline" onClick={() => setStep(2)} className="font-heading tracking-widest border-border">
-                    BACK
-                  </Button>
-                  <Button type="submit" size="lg" className="flex-1 font-heading tracking-widest">
-                    CONFIRM BOOKING
-                  </Button>
-                </div>
-              </form>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
-              <p className="text-center text-xs text-muted-foreground mt-8">
-                By booking, your appointment will be synced to our calendar. We'll send a confirmation email shortly.
-              </p>
-            </motion.div>
-          )}
+            {/* Pax Guest */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">PAX GUEST *</label>
+              <Input type="number" value={form.paxGuest} onChange={(e) => setForm({ ...form, paxGuest: e.target.value })} placeholder="Number of guests" required className="bg-background border-border" />
+            </div>
+
+            {/* Event Theme Motif */}
+            <div>
+              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT THEME MOTIF</label>
+              <Input value={form.themeMotif} onChange={(e) => setForm({ ...form, themeMotif: e.target.value })} placeholder="e.g. Rustic, Minimalist, Tropical" className="bg-background border-border" />
+            </div>
+
+            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date}>
+              SUBMIT BOOKING
+            </Button>
+          </form>
         </div>
       </section>
+
+      {/* Confirmation Modal */}
+      <AnimatePresence>
+        {showConfirmation && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+            onClick={closeConfirmation}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white text-black rounded-lg p-8 md:p-10 max-w-md w-full text-center relative"
+            >
+              <button onClick={closeConfirmation} className="absolute top-4 right-4 text-black/50 hover:text-black">
+                <X size={20} />
+              </button>
+              <div className="text-4xl mb-4">✅</div>
+              <h2 className="font-heading text-2xl font-bold mb-2">Booking Submitted!</h2>
+              <p className="text-sm text-black/70 leading-relaxed mb-4">
+                Kindly be on the lookout for a confirmation email with the quotation. Please contact us on Messenger for any additional inquiries.
+              </p>
+              <div className="bg-gray-100 rounded-lg p-4 mb-6">
+                <p className="text-xs text-black/50 font-heading tracking-widest mb-1">BOOKING NUMBER</p>
+                <p className="font-heading text-xl font-bold">{bookingNumber}</p>
+              </div>
+              <Button onClick={closeConfirmation} className="w-full font-heading tracking-widest bg-black text-white hover:bg-black/90">
+                CLOSE
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 };

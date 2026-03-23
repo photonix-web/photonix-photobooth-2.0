@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
-import teamPhoto from "@/assets/group-chibi.jpg";
+import teamEm from "@/assets/team-em.png";
+import teamKin from "@/assets/team-kin.png";
 
 const About = () => (
   <Layout>

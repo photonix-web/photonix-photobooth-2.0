@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const booths = [
   {
     name: "Basic",
-    subtitle: "Standard Boxed Photobooth",
+    subtitle: "Backdrop + Stand only",
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱4,000" },
       { format: "Photostrip / Polaroid", price: "₱4,500" },
@@ -46,7 +46,7 @@ const booths = [
   },
   {
     name: "Classic",
-    subtitle: "Classic Wide-Angle Photobooth",
+    subtitle: "Boxed Retro Style Photobooth",
     popular: true,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱10,000" },

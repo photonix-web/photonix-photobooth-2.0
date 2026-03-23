@@ -1,13 +1,11 @@
 import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/photonix-logo.png";
 
 const Footer = () => (
   <footer className="bg-secondary border-t border-border section-padding">
     <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
       <div>
-        <h3 className="font-heading text-xl font-bold mb-4">
-          <span className="text-primary">photonix</span>{" "}
-          <span className="text-xs tracking-[0.3em]">PHOTOBOOTH</span>
-        </h3>
+        <img src={logo} alt="Photonix Photobooth" className="h-8 mb-4" />
         <p className="text-muted-foreground text-sm leading-relaxed">
           Your mobile pop-up photobooth — making your events memorable.
         </p>

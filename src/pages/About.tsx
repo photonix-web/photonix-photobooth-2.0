@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import teamEm from "@/assets/em-chibi.png";
 import teamKin from "@/assets/kin-chibi.png";
+import groupChibi from "@/assets/group-chibi.png";
 
 const About = () => (
   <Layout>
@@ -46,7 +47,7 @@ const About = () => (
             transition={{ delay: 0.4 }}
             className="flex justify-center"
           >
-            <img src={teamEm} alt="Photonix Founders" loading="lazy" width={800} height={600} className="rounded-lg border border-border shadow-xl w-full max-w-md object-cover" />
+            <img src={groupChibi} alt="Photonix Founders" loading="lazy" width={800} height={600} className="rounded-lg border border-border shadow-xl w-full max-w-md object-cover" />
           </motion.div>
         </div>
       </div>

@@ -60,8 +60,8 @@ const About = () => (
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
-            { name: "Em", role: "Co-Founder & Creative Director", desc: "Passionate about photography and creating cherished memories through every booth experience." },
-            { name: "Kin", role: "Co-Founder & Operations Lead", desc: "Ensuring every event runs smoothly, from logistics to setup and teardown." },
+            { name: "Em", role: "Co-Founder & Creative Director", desc: "Passionate about photography and creating cherished memories through every booth experience.", img: teamEm },
+            { name: "Kin", role: "Co-Founder & Operations Lead", desc: "Ensuring every event runs smoothly, from logistics to setup and teardown.", img: teamKin },
           ].map((member, i) => (
             <motion.div
               key={i}
@@ -71,9 +71,7 @@ const About = () => (
               transition={{ delay: i * 0.15 }}
               className="bg-card border border-border rounded-lg p-8 text-center"
             >
-              <div className="w-24 h-24 mx-auto rounded-full bg-muted flex items-center justify-center text-3xl font-heading font-bold text-primary mb-4">
-                {member.name[0]}
-              </div>
+              <img src={member.img} alt={member.name} loading="lazy" width={512} height={512} className="w-28 h-28 mx-auto rounded-full object-cover border-2 border-primary mb-4" />
               <h3 className="font-heading text-xl font-semibold">{member.name}</h3>
               <p className="text-primary text-sm font-heading tracking-widest mt-1">{member.role}</p>
               <p className="text-muted-foreground text-sm mt-4">{member.desc}</p>

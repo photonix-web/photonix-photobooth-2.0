@@ -46,7 +46,7 @@ const About = () => (
             transition={{ delay: 0.4 }}
             className="flex justify-center"
           >
-            <img src={teamPhoto} alt="Photonix Founders" loading="lazy" width={800} height={600} className="rounded-lg border border-border shadow-xl w-full max-w-md object-cover" />
+            <img src={teamEm} alt="Photonix Founders" loading="lazy" width={800} height={600} className="rounded-lg border border-border shadow-xl w-full max-w-md object-cover" />
           </motion.div>
         </div>
       </div>

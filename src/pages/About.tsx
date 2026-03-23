@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
-import teamPhoto from "@/assets/team-founders.jpg";
+import teamPhoto from "@/assets/group-chibi.jpg";
 
 const About = () => (
   <Layout>
@@ -60,7 +60,7 @@ const About = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
             { name: "Em", role: "Co-Founder & Creative Director", desc: "Passionate about photography and creating cherished memories through every booth experience." },
-            { name: "Kuya", role: "Co-Founder & Operations Lead", desc: "Ensuring every event runs smoothly, from logistics to setup and teardown." },
+            { name: "Kin", role: "Co-Founder & Operations Lead", desc: "Ensuring every event runs smoothly, from logistics to setup and teardown." },
           ].map((member, i) => (
             <motion.div
               key={i}

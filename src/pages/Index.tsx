@@ -33,18 +33,18 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center section-padding overflow-hidden">
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section
+        className="relative min-h-[90vh] flex items-center section-padding overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-background/60" />
+        <div className="container mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="max-w-xl"
           >
-            <h1 className="font-heading text-5xl md:text-7xl font-bold leading-tight">
-              <span className="text-primary">photonix</span>
-              <br />
-              <span className="text-foreground text-2xl md:text-3xl tracking-[0.4em]">PHOTOBOOTH</span>
-            </h1>
             <p className="text-muted-foreground text-lg mt-6 max-w-md leading-relaxed">
               Your mobile pop-up photobooth — making your events memorable.
             </p>
@@ -60,14 +60,6 @@ const Index = () => {
               <a href="https://www.facebook.com/photonixphotobooth" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">facebook.com/photonixphotobooth</a>
               <a href="https://www.instagram.com/photonixbooth/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@photonixbooth</a>
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center"
-          >
-            <img src={heroImage} alt="Photonix Photobooth setup" width={600} height={450} className="max-w-full h-auto drop-shadow-2xl" />
           </motion.div>
         </div>
       </section>

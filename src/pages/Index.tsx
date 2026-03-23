@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import heroImage from "@/assets/photobooth-hero.png";
+import logo from "@/assets/photonix-logo.png";
 import event1 from "@/assets/event-1.jpg";
 import event2 from "@/assets/event-2.jpg";
 import event3 from "@/assets/event-3.jpg";
@@ -45,7 +46,8 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className="max-w-xl"
           >
-            <p className="text-muted-foreground text-lg mt-6 max-w-md leading-relaxed">
+            <img src={logo} alt="Photonix Photobooth" className="h-16 md:h-20 mb-6" />
+            <p className="text-muted-foreground text-lg max-w-md leading-relaxed">
               Your mobile pop-up photobooth — making your events memorable.
             </p>
             <div className="flex gap-4 mt-8">

@@ -5,15 +5,15 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import heroImage from "@/assets/photobooth-hero.png";
 import logo from "@/assets/photonix-logo.png";
-import event1 from "@/assets/school-event.jpg";
-import event2 from "@/assets/weddings-event.jpg";
-import event3 from "@/assets/corporates-event.jpg";
+import school from "@/assets/school-event.jpg";
+import wedding from "@/assets/weddings-event.jpg";
+import corporate from "@/assets/corporates-event.jpg";
 import { Button } from "@/components/ui/button";
 
 const events = [
-  { img: event1, title: "University Intramural Meet", desc: "Fun-filled photo sessions with students" },
-  { img: event2, title: "Wedding Celebrations", desc: "Capturing love stories beautifully" },
-  { img: event3, title: "Corporate Year-End Party", desc: "Making corporate events memorable" },
+  { img: school, title: "University Intramural Meet", desc: "Fun-filled photo sessions with students" },
+  { img: wedding, title: "Wedding Celebrations", desc: "Capturing love stories beautifully" },
+  { img: corporate, title: "Corporate Year-End Party", desc: "Making corporate events memorable" },
 ];
 
 const testimonials = [

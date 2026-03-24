@@ -84,7 +84,7 @@ const About = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 max-w-2xl mx-auto">
           {[
             { name: "Donny", role: "Technical Staff", desc: "Ensures everything is prepared and operates the booth seamlessly at every event.", img: teamDonny },
-            { name: "Bro", role: "Photographer & Content Creator", desc: "Documents events, creates content, and manages our social media presence.", img: teamBro },
+            { name: "Bro", role: "Photographer", desc: "Documents events, creates content, and manages our social media presence.", img: teamBro },
           ].map((member, i) => (
             <motion.div
               key={i}

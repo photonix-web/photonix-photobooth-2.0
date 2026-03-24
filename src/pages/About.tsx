@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import teamEm from "@/assets/em-chibi.png";
-import teamKin from "@/assets/kin-chibi.png";
-import teamDonny from "@/assets/team-donny.png";
-import teamBro from "@/assets/team-bro.png";
+import teamKin from "@/assets/kin-chibi-2.png";
+import teamDonny from "@/assets/edon-chibi.png";
+import teamBro from "@/assets/BRO-CHIBI.png";
 import groupChibi from "@/assets/group-chibi.png";
 
 const About = () => (

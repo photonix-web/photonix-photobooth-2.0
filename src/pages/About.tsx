@@ -81,6 +81,26 @@ const About = () => (
             </motion.div>
           ))}
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 max-w-2xl mx-auto">
+          {[
+            { name: "Donny", role: "Technical Staff", desc: "Ensures everything is prepared and operates the booth seamlessly at every event.", img: teamDonny },
+            { name: "Bro", role: "Photographer & Content Creator", desc: "Documents events, creates content, and manages our social media presence.", img: teamBro },
+          ].map((member, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: (i + 2) * 0.15 }}
+              className="bg-card border border-border rounded-lg p-6 text-center"
+            >
+              <img src={member.img} alt={member.name} loading="lazy" width={512} height={512} className="w-20 h-20 mx-auto rounded-full object-cover border-2 border-primary mb-3" />
+              <h3 className="font-heading text-lg font-semibold">{member.name}</h3>
+              <p className="text-primary text-xs font-heading tracking-widest mt-1">{member.role}</p>
+              <p className="text-muted-foreground text-xs mt-3">{member.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   </Layout>

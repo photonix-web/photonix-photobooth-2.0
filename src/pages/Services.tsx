@@ -132,6 +132,9 @@ const Services = () => (
                   MOST POPULAR
                 </div>
               )}
+              <div className="flex items-center justify-center bg-muted/30 p-4">
+                <img src={booth.image} alt={booth.name} className="h-40 object-contain" />
+              </div>
               <div className="p-6">
                 <h3 className="font-heading text-xl font-bold">{booth.name}</h3>
                 <p className="text-muted-foreground text-sm mt-1">{booth.subtitle}</p>

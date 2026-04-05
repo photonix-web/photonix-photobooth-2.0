@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
-import heroImage from "@/assets/photobooth-hero.png";
+import heroImage from "@/assets/PTX-hero-new.png";
 import heroGallery from "@/assets/hero-2-new.png";
 import logo from "@/assets/photonix-logo.png";
 import school from "@/assets/school-event.jpg";

@@ -123,7 +123,7 @@ const Index = () => {
         <img
           src={heroGallery}
           alt="Photonix Photobooth Gallery"
-          className="w-full h-[600px] md:h-[500px] object-cover object-top"
+          className="w-full h-[700px] md:h-[500px] object-cover object-top"
         />
       </section>
 

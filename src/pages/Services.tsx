@@ -2,6 +2,10 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import sample4R from "@/assets/sample-4r.png";
+import samplePhotostrip from "@/assets/sample-photostrip.png";
+import sample5Frames from "@/assets/sample-5frames.png";
+import samplePolaroid from "@/assets/sample-polaroid.png";
 
 const booths = [
   {
@@ -161,15 +165,23 @@ const Services = () => (
             SAMPLE <span className="text-primary">PHOTOS</span>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {["4R Style", "Photo-strip", "5 Frames", "Polaroid"].map((label, i) => (
-              <div key={i} className="bg-card border border-border rounded-lg aspect-[3/4] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto bg-muted rounded-lg flex items-center justify-center text-primary font-heading text-xl mb-3">
-                    📸
-                  </div>
-                  <p className="text-sm text-muted-foreground font-heading tracking-widest">{label}</p>
-                </div>
-              </div>
+            {[
+              { label: "4R Style", img: sample4R },
+              { label: "Photo-strip", img: samplePhotostrip },
+              { label: "5 Frames", img: sample5Frames },
+              { label: "Polaroid", img: samplePolaroid },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-card border border-border rounded-lg overflow-hidden"
+              >
+                <img src={item.img} alt={item.label} className="w-full object-cover" />
+                <p className="text-sm text-muted-foreground font-heading tracking-widest text-center py-3">{item.label}</p>
+              </motion.div>
             ))}
           </div>
         </div>

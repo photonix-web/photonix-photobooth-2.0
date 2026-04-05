@@ -119,13 +119,13 @@ const Index = () => {
       </section>
 
       {/* Gallery Hero */}
-      <section className="w-full overflow-hidden">
-        <img
-          src={heroGallery}
-          alt="Photonix Photobooth Gallery"
-          className="w-full h-[700px] md:h-[500px] object-cover object-top"
-        />
-      </section>
+          <section className="w-full overflow-hidden">
+            <img
+                src={heroGallery}
+                alt="Photonix Photobooth Gallery"
+                className="w-full h-auto"
+            />
+            </section>
 
       {/* Testimonials */}
       <section className="section-padding">

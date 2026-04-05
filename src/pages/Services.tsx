@@ -6,11 +6,16 @@ import sample4R from "@/assets/sample-4r.png";
 import samplePhotostrip from "@/assets/sample-photostrip.png";
 import sample5Frames from "@/assets/sample-5frames.png";
 import samplePolaroid from "@/assets/sample-polaroid.png";
+import boothBasic from "@/assets/booth-basic.png";
+import boothCurtain from "@/assets/booth-curtain.png";
+import boothClassic from "@/assets/booth-classic.png";
+import boothHighangle from "@/assets/booth-highangle.png";
 
 const booths = [
   {
     name: "Basic",
     subtitle: "Backdrop + Stand only",
+    image: boothBasic,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱4,000" },
       { format: "Photostrip / Polaroid", price: "₱4,500" },
@@ -31,6 +36,7 @@ const booths = [
   {
     name: "Curtain",
     subtitle: "Curtain Photobooth",
+    image: boothCurtain,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱6,000" },
       { format: "Photostrip / Polaroid", price: "₱6,500" },
@@ -51,6 +57,7 @@ const booths = [
   {
     name: "Classic",
     subtitle: "Boxed Retro Style Photobooth",
+    image: boothClassic,
     popular: true,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱10,000" },
@@ -73,6 +80,7 @@ const booths = [
   {
     name: "High-Angle",
     subtitle: "High-Angle Photobooth",
+    image: boothHighangle,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱12,000" },
       { format: "Photostrip / Polaroid", price: "₱12,500" },
@@ -124,6 +132,9 @@ const Services = () => (
                   MOST POPULAR
                 </div>
               )}
+              <div className="flex items-center justify-center bg-muted/30 p-4">
+                <img src={booth.image} alt={booth.name} className="h-40 object-contain" />
+              </div>
               <div className="p-6">
                 <h3 className="font-heading text-xl font-bold">{booth.name}</h3>
                 <p className="text-muted-foreground text-sm mt-1">{booth.subtitle}</p>

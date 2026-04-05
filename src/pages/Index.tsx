@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import heroImage from "@/assets/photobooth-hero.png";
+import heroGallery from "@/assets/hero-gallery.png";
 import logo from "@/assets/photonix-logo.png";
 import school from "@/assets/school-event.jpg";
 import wedding from "@/assets/weddings-event.jpg";
@@ -115,6 +116,15 @@ const Index = () => {
             </a>
           </div>
         </div>
+      </section>
+
+      {/* Gallery Hero */}
+      <section className="w-full overflow-hidden">
+        <img
+          src={heroGallery}
+          alt="Photonix Photobooth Gallery"
+          className="w-full h-[400px] md:h-[500px] object-cover object-top"
+        />
       </section>
 
       {/* Testimonials */}

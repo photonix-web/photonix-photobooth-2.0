@@ -6,10 +6,10 @@ import sample4R from "@/assets/sample-4r.png";
 import samplePhotostrip from "@/assets/sample-photostrip.png";
 import sample5Frames from "@/assets/sample-5frames.png";
 import samplePolaroid from "@/assets/sample-polaroid.png";
-import boothBasicNew from "@/assets/Basic-New.png";
-import boothCurtainNew from "@/assets/Curtain-New.png";
-import boothClassicNew from "@/assets/Classic-New.png";
-import boothHighangleNew from "@/assets/High-Angle-New.png";
+import boothBasicNew from "@/assets/Basic-New.jpg";
+import boothCurtainNew from "@/assets/Curtain-New.jpg";
+import boothClassicNew from "@/assets/Classic-New.jpg";
+import boothHighangleNew from "@/assets/High-Angle-New.jpg";
 
 const booths = [
   {

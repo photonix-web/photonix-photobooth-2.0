@@ -14,7 +14,9 @@ import boothHighangle from "@/assets/booth-highangle.png";
 const booths = [
   {
     name: "Basic",
+    subtitle: "Backdrop + Stand only",
     image: boothBasic,
+    prices: [
       { format: "4R Style (4\" × 6\")", price: "₱4,000" },
       { format: "Photostrip / Polaroid", price: "₱4,500" },
       { format: "5 Frames", price: "₱5,000" },
@@ -34,6 +36,7 @@ const booths = [
   {
     name: "Curtain",
     subtitle: "Curtain Photobooth",
+    image: boothCurtain,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱6,000" },
       { format: "Photostrip / Polaroid", price: "₱6,500" },
@@ -54,6 +57,7 @@ const booths = [
   {
     name: "Classic",
     subtitle: "Boxed Retro Style Photobooth",
+    image: boothClassic,
     popular: true,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱10,000" },
@@ -76,6 +80,7 @@ const booths = [
   {
     name: "High-Angle",
     subtitle: "High-Angle Photobooth",
+    image: boothHighangle,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱12,000" },
       { format: "Photostrip / Polaroid", price: "₱12,500" },

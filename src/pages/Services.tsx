@@ -14,8 +14,7 @@ import boothHighangle from "@/assets/booth-highangle.png";
 const booths = [
   {
     name: "Basic",
-    subtitle: "Backdrop + Stand only",
-    prices: [
+    image: boothBasic,
       { format: "4R Style (4\" × 6\")", price: "₱4,000" },
       { format: "Photostrip / Polaroid", price: "₱4,500" },
       { format: "5 Frames", price: "₱5,000" },

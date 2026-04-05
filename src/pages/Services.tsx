@@ -6,16 +6,16 @@ import sample4R from "@/assets/sample-4r.png";
 import samplePhotostrip from "@/assets/sample-photostrip.png";
 import sample5Frames from "@/assets/sample-5frames.png";
 import samplePolaroid from "@/assets/sample-polaroid.png";
-import boothBasicNew from "@/assets/Basic-Final.png";
-import boothCurtainNew from "@/assets/Curtain-Final.png";
-import boothClassicNew from "@/assets/Classic-Final.png";
-import boothHighangleNew from "@/assets/High-Angle-Final.png";
+import boothBasicFinal from "@/assets/Basic-Final.png";
+import boothCurtainFinal from "@/assets/Curtain-Final.png";
+import boothClassicFinal from "@/assets/Classic-Final.png";
+import boothHighangleFinal from "@/assets/High-Angle-Final.png";
 
 const booths = [
   {
     name: "Basic",
     subtitle: "Backdrop + Stand only",
-    image: boothBasicNew,
+    image: boothBasicFinal,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱4,000" },
       { format: "Photostrip / Polaroid", price: "₱4,500" },
@@ -36,7 +36,7 @@ const booths = [
   {
     name: "Curtain",
     subtitle: "Curtain Photobooth",
-    image: boothCurtainNew,
+    image: boothCurtainFinal,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱6,000" },
       { format: "Photostrip / Polaroid", price: "₱6,500" },
@@ -57,7 +57,7 @@ const booths = [
   {
     name: "Classic",
     subtitle: "Boxed Retro Style Photobooth",
-    image: boothClassicNew,
+    image: boothClassicFinal,
     popular: true,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱10,000" },
@@ -80,7 +80,7 @@ const booths = [
   {
     name: "High-Angle",
     subtitle: "High-Angle Photobooth",
-    image: boothHighangleNew,
+    image: boothHighangleFinal,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱12,000" },
       { format: "Photostrip / Polaroid", price: "₱12,500" },

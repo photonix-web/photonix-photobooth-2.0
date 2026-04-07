@@ -51,7 +51,7 @@ const Index = () => {
             className="max-w-xl"
           >
             <img src={logo} alt="Photonix Photobooth" className="h-28 md:h-36 mb-3 sm:mb-4 md:mb-6" />
-            <p className="text-muted-foreground text-lg max-w-md leading-relaxed">
+            <p className="text-muted-foreground text-lg max-w-md leading-relaxed text-center md:text-left">
               Your mobile pop-up photobooth — making your events memorable.
             </p>
             <div className="flex gap-4 mt-4 sm:mt-5 md:mt-8">

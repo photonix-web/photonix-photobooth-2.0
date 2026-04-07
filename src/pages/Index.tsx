@@ -36,12 +36,12 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section
-        className="relative min-h-[70vh] flex items-end sm:items-center section-padding overflow-hidden pb-0 sm:pb-8"
+        className="relative min-h-[70vh] flex items-start pt-8 sm:pt-12 md:items-center md:pt-0 section-padding overflow-hidden pb-0 sm:pb-8"
       >
         <img
           src={heroImage}
           alt=""
-          className="absolute right-[-25px] bottom-0 w-auto h-[65%] sm:h-[75%] md:h-[120%] md:bottom-[-25px] object-contain object-bottom md:object-center"
+          className="absolute right-[-25px] bottom-0 w-auto h-[55%] sm:h-[60%] md:h-[120%] md:bottom-[-25px] object-contain object-bottom md:object-center"
         />
         <div className="container mx-auto relative z-10">
           <motion.div
@@ -50,11 +50,11 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className="max-w-xl"
           >
-            <img src={logo} alt="Photonix Photobooth" className="h-28 md:h-36 mb-6" />
+            <img src={logo} alt="Photonix Photobooth" className="h-28 md:h-36 mb-3 sm:mb-4 md:mb-6" />
             <p className="text-muted-foreground text-lg max-w-md leading-relaxed">
               Your mobile pop-up photobooth — making your events memorable.
             </p>
-            <div className="flex gap-4 mt-8">
+            <div className="flex gap-4 mt-4 sm:mt-5 md:mt-8">
               <Button asChild size="lg" className="font-heading tracking-widest">
                 <Link to="/book">BOOK NOW</Link>
               </Button>
@@ -62,7 +62,7 @@ const Index = () => {
                 <Link to="/services">OUR SERVICES</Link>
               </Button>
             </div>
-            <div className="flex gap-6 mt-8 text-sm text-muted-foreground">
+            <div className="flex gap-6 mt-4 sm:mt-5 md:mt-8 text-sm text-muted-foreground">
               <a href="https://www.facebook.com/photonixphotobooth" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">facebook.com/photonixphotobooth</a>
               <a href="https://www.instagram.com/photonixbooth/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@photonixbooth</a>
             </div>

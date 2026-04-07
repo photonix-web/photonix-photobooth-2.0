@@ -36,12 +36,12 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section
-        className="relative min-h-[70vh] flex items-center section-padding overflow-hidden"
+        className="relative min-h-[70vh] flex items-end sm:items-center section-padding overflow-hidden pb-0 sm:pb-8"
       >
         <img
           src={heroImage}
           alt=""
-          className="absolute right-[-25px] bottom-0 w-auto h-[80%] md:h-[120%] md:bottom-[-25px] object-contain"
+          className="absolute right-[-25px] bottom-0 w-auto h-[65%] sm:h-[75%] md:h-[120%] md:bottom-[-25px] object-contain object-bottom md:object-center"
         />
         <div className="container mx-auto relative z-10">
           <motion.div

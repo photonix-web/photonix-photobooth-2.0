@@ -8,6 +8,8 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import BookUs from "./pages/BookUs";
+import BookingQuotation from "./pages/BookingQuotation";
+import BookingConfirmed from "./pages/BookingConfirmed";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

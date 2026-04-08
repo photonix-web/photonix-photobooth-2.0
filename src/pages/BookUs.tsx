@@ -1,10 +1,11 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
-import { ChevronRight, CalendarDays, X } from "lucide-react";
+import { CalendarDays, Upload, X, Image } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -17,17 +18,25 @@ const boothOptions = ["Basic", "Curtain", "Classic", "High-Angle"];
 const packageTypes = ["4R", "Photostrip", "Polaroid", "5 Frames"];
 const venueOptions = ["Indoor", "Outdoor"];
 
-const generateBookingNumber = () => {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let result = "PTX-";
-  for (let i = 0; i < 6; i++) result += chars.charAt(Math.floor(Math.random() * chars.length));
-  return result;
+const provinces = [
+  "Metro Manila", "Cavite", "Laguna", "Batangas", "Rizal", "Bulacan",
+  "Pampanga", "Tarlac", "Zambales", "Pangasinan", "Cebu", "Davao del Sur",
+  "Iloilo", "Negros Occidental", "Quezon",
+];
+
+const getMinDate = () => {
+  const d = new Date();
+  d.setDate(d.getDate() + 3);
+  d.setHours(0, 0, 0, 0);
+  return d;
 };
 
 const BookUs = () => {
+  const navigate = useNavigate();
   const [date, setDate] = useState<Date | undefined>();
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [bookingNumber, setBookingNumber] = useState("");
+  const [themeFile, setThemeFile] = useState<File | null>(null);
+  const [themePreview, setThemePreview] = useState<string | null>(null);
+  const themeInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -35,28 +44,50 @@ const BookUs = () => {
     booth: "",
     packageType: "",
     eventName: "",
-    location: "",
+    streetAddress: "",
+    barangay: "",
+    city: "",
+    province: "",
+    postalCode: "",
     startTime: "",
     venue: "",
     paxGuest: "",
     themeMotif: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const num = generateBookingNumber();
-    setBookingNumber(num);
-    setShowConfirmation(true);
+  const handleThemeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setThemeFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => setThemePreview(reader.result as string);
+      reader.readAsDataURL(file);
+    }
   };
 
-  const closeConfirmation = () => {
-    setShowConfirmation(false);
-    setDate(undefined);
-    setForm({
-      name: "", email: "", phone: "", booth: "", packageType: "",
-      eventName: "", location: "", startTime: "", venue: "", paxGuest: "", themeMotif: "",
-    });
+  const removeThemeFile = () => {
+    setThemeFile(null);
+    setThemePreview(null);
+    if (themeInputRef.current) themeInputRef.current.value = "";
   };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!date) return;
+
+    const bookingData = {
+      ...form,
+      date: date.toISOString(),
+      themeFileName: themeFile?.name || null,
+      themePreview,
+    };
+
+    navigate("/book/quotation", { state: bookingData });
+  };
+
+  const minDate = getMinDate();
+
+  const labelClass = "text-sm text-muted-foreground font-heading tracking-widest block mb-2";
 
   return (
     <Layout>
@@ -76,26 +107,29 @@ const BookUs = () => {
           <form onSubmit={handleSubmit} className="space-y-5 bg-card border border-border rounded-lg p-6 md:p-10">
             {/* Name */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">NAME *</label>
+              <label className={labelClass}>NAME *</label>
               <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your full name" required className="bg-background border-border" />
             </div>
 
             {/* Email */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EMAIL *</label>
+              <label className={labelClass}>EMAIL *</label>
               <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" required className="bg-background border-border" />
+              <p className="text-xs text-muted-foreground mt-1.5 italic">
+                Please use an active email, as we will contact you there for any questions and clarifications.
+              </p>
             </div>
 
             {/* Contact Number */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">CONTACT NUMBER *</label>
+              <label className={labelClass}>CONTACT NUMBER *</label>
               <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+63 XXX XXX XXXX" required className="bg-background border-border" />
             </div>
 
             {/* Event Package & Package Type */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT PACKAGE *</label>
+                <label className={labelClass}>EVENT PACKAGE *</label>
                 <Select value={form.booth} onValueChange={(v) => setForm({ ...form, booth: v })}>
                   <SelectTrigger className="bg-background border-border">
                     <SelectValue placeholder="Select package" />
@@ -108,7 +142,7 @@ const BookUs = () => {
                 </Select>
               </div>
               <div>
-                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">PACKAGE TYPE *</label>
+                <label className={labelClass}>PACKAGE TYPE *</label>
                 <Select value={form.packageType} onValueChange={(v) => setForm({ ...form, packageType: v })}>
                   <SelectTrigger className="bg-background border-border">
                     <SelectValue placeholder="Select type" />
@@ -124,13 +158,13 @@ const BookUs = () => {
 
             {/* Event Name */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT NAME (TO BE ADDED IN DESIGN FRAME) *</label>
+              <label className={labelClass}>EVENT NAME (TO BE ADDED IN DESIGN FRAME) *</label>
               <Input value={form.eventName} onChange={(e) => setForm({ ...form, eventName: e.target.value })} placeholder="e.g. John & Jane's Wedding" required className="bg-background border-border" />
             </div>
 
             {/* Date */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2 flex items-center gap-2">
+              <label className={`${labelClass} flex items-center gap-2`}>
                 <CalendarDays size={16} className="text-primary" /> DATE *
               </label>
               <div className="bg-background border border-border rounded-lg p-4 inline-block">
@@ -138,31 +172,51 @@ const BookUs = () => {
                   mode="single"
                   selected={date}
                   onSelect={setDate}
-                  disabled={(d) => d < new Date()}
+                  disabled={(d) => d < minDate}
                   className="pointer-events-auto"
                 />
               </div>
+              <p className="text-xs text-muted-foreground mt-2 italic">
+                We only accept and accommodate events booked at least 3 days in advance.
+              </p>
               {date && (
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-sm text-foreground mt-2">
                   Selected: {date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
                 </p>
               )}
             </div>
 
-            {/* Event Location */}
-            <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT LOCATION ADDRESS *</label>
-              <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="Full address of the venue" required className="bg-background border-border" />
+            {/* Event Location Address */}
+            <div className="space-y-4">
+              <label className={labelClass}>EVENT LOCATION ADDRESS *</label>
+              <Input value={form.streetAddress} onChange={(e) => setForm({ ...form, streetAddress: e.target.value })} placeholder="Street Address / Building / Lot" required className="bg-background border-border" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Input value={form.barangay} onChange={(e) => setForm({ ...form, barangay: e.target.value })} placeholder="Barangay" required className="bg-background border-border" />
+                <Input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="City / Municipality" required className="bg-background border-border" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Select value={form.province} onValueChange={(v) => setForm({ ...form, province: v })}>
+                  <SelectTrigger className="bg-background border-border">
+                    <SelectValue placeholder="Province" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {provinces.map((p) => (
+                      <SelectItem key={p} value={p}>{p}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input value={form.postalCode} onChange={(e) => setForm({ ...form, postalCode: e.target.value })} placeholder="Postal Code" required className="bg-background border-border" />
+              </div>
             </div>
 
             {/* Time to Start & Venue */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">TIME TO START BOOTH *</label>
+                <label className={labelClass}>TIME TO START BOOTH *</label>
                 <Input type="time" value={form.startTime} onChange={(e) => setForm({ ...form, startTime: e.target.value })} required className="bg-background border-border" />
               </div>
               <div>
-                <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">VENUE *</label>
+                <label className={labelClass}>VENUE *</label>
                 <Select value={form.venue} onValueChange={(v) => setForm({ ...form, venue: v })}>
                   <SelectTrigger className="bg-background border-border">
                     <SelectValue placeholder="Select venue type" />
@@ -178,59 +232,60 @@ const BookUs = () => {
 
             {/* Pax Guest */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">PAX GUEST *</label>
+              <label className={labelClass}>PAX GUEST *</label>
               <Input type="number" value={form.paxGuest} onChange={(e) => setForm({ ...form, paxGuest: e.target.value })} placeholder="Number of guests" required className="bg-background border-border" />
             </div>
 
             {/* Event Theme Motif */}
             <div>
-              <label className="text-sm text-muted-foreground font-heading tracking-widest block mb-2">EVENT THEME MOTIF</label>
+              <label className={labelClass}>EVENT THEME MOTIF</label>
               <Input value={form.themeMotif} onChange={(e) => setForm({ ...form, themeMotif: e.target.value })} placeholder="e.g. Rustic, Minimalist, Tropical" className="bg-background border-border" />
             </div>
 
-            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date}>
-              SUBMIT BOOKING
+            {/* Theme Photo Upload */}
+            <div>
+              <label className={labelClass}>EVENT THEME / MOTIF REFERENCE (OPTIONAL)</label>
+              <p className="text-xs text-muted-foreground mb-3">
+                Let us know what you're specifically aiming for — upload your event invitation or any event photo/material so we can match it to your event.
+              </p>
+              <input
+                ref={themeInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleThemeUpload}
+                className="hidden"
+                id="theme-upload"
+              />
+              {!themeFile ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => themeInputRef.current?.click()}
+                  className="gap-2"
+                >
+                  <Upload size={16} /> Upload Photo
+                </Button>
+              ) : (
+                <div className="flex items-center gap-3 bg-background border border-border rounded-lg p-3">
+                  {themePreview ? (
+                    <img src={themePreview} alt="Theme preview" className="w-16 h-16 object-cover rounded" />
+                  ) : (
+                    <Image size={24} className="text-muted-foreground" />
+                  )}
+                  <span className="text-sm text-foreground flex-1 truncate">{themeFile.name}</span>
+                  <button type="button" onClick={removeThemeFile} className="text-muted-foreground hover:text-foreground">
+                    <X size={16} />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date || !form.booth || !form.packageType || !form.venue || !form.province}>
+              PROCEED TO QUOTATION
             </Button>
           </form>
         </div>
       </section>
-
-      {/* Confirmation Modal */}
-      <AnimatePresence>
-        {showConfirmation && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
-            onClick={closeConfirmation}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white text-black rounded-lg p-8 md:p-10 max-w-md w-full text-center relative"
-            >
-              <button onClick={closeConfirmation} className="absolute top-4 right-4 text-black/50 hover:text-black">
-                <X size={20} />
-              </button>
-              <div className="text-4xl mb-4">✅</div>
-              <h2 className="font-heading text-2xl font-bold mb-2">Booking Submitted!</h2>
-              <p className="text-sm text-black/70 leading-relaxed mb-4">
-                Kindly be on the lookout for a confirmation email with the quotation. Please contact us on Messenger for any additional inquiries.
-              </p>
-              <div className="bg-gray-100 rounded-lg p-4 mb-6">
-                <p className="text-xs text-black/50 font-heading tracking-widest mb-1">BOOKING NUMBER</p>
-                <p className="font-heading text-xl font-bold">{bookingNumber}</p>
-              </div>
-              <Button onClick={closeConfirmation} className="w-full font-heading tracking-widest bg-black text-white hover:bg-black/90">
-                CLOSE
-              </Button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </Layout>
   );
 };

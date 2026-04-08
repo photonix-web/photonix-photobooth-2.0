@@ -139,6 +139,12 @@ const BookingQuotation = () => {
           {/* Disclaimers */}
           <div className="bg-card border border-border rounded-lg p-6 md:p-8 mb-6 space-y-4">
             <h2 className="font-heading text-xl tracking-widest mb-4">AGREEMENTS</h2>
+            <div className="bg-background border border-border rounded-lg p-4 mb-4">
+              <p className="text-xs font-heading tracking-widest text-muted-foreground mb-2">PHOTOBOOTH DISCLAIMER</p>
+              <p className="text-sm text-foreground leading-relaxed">
+                I understand and agree that the Photo Booth service runs continuously during the booked rental period and cannot be paused, stopped, refunded, or extended due to inactivity or event delays.
+              </p>
+            </div>
             <div className="flex items-start gap-3">
               <Checkbox
                 id="disclaimer"
@@ -147,7 +153,7 @@ const BookingQuotation = () => {
                 className="mt-0.5"
               />
               <label htmlFor="disclaimer" className="text-sm text-foreground cursor-pointer leading-relaxed">
-                I agree with the <span className="text-primary font-medium">Continuous Photo Booth Disclaimer</span>.
+                I agree with the <span className="text-primary font-medium">Continuous Photo Booth Disclaimer</span> above.
               </label>
             </div>
             <div className="flex items-start gap-3">

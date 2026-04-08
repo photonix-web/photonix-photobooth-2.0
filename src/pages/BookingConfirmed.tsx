@@ -47,8 +47,18 @@ const BookingConfirmed = () => {
               <span className="text-primary">SUBMITTED & CONFIRMED!</span>
             </h1>
 
-            <p className="text-muted-foreground text-lg mb-8 max-w-lg mx-auto leading-relaxed">
+            <p className="text-muted-foreground text-lg mb-4 max-w-lg mx-auto leading-relaxed">
               Please be on the lookout for any emails for any questions and/or clarification. See you at the event!
+            </p>
+
+            <p className="text-muted-foreground text-sm mb-4 max-w-lg mx-auto leading-relaxed">
+              We will validate your payment and contact you via email if we need any questions or clarifications regarding your booking.
+            </p>
+
+            <p className="text-muted-foreground text-sm mb-8 max-w-lg mx-auto leading-relaxed">
+              For faster assistance, you may also message us on our{" "}
+              <a href="https://www.facebook.com/photonixphotobooth" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">Facebook Page</a>{" "}
+              and include your Booking Number for any additional input or adjustments.
             </p>
           </motion.div>
 

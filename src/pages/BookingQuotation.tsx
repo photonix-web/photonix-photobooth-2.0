@@ -307,7 +307,11 @@ const BookingQuotation = () => {
             disabled={!canSubmit}
             onClick={handleSubmit}
           >
-            PAYMENT & BOOKING
+            {isSubmitting ? (
+              <><Loader2 size={18} className="animate-spin mr-2" /> SUBMITTING...</>
+            ) : (
+              "PAYMENT & BOOKING"
+            )}
           </Button>
         </div>
       </section>

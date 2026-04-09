@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          barangay: string | null
+          booking_number: string
+          booth_package: string
+          city: string | null
+          client_name: string
+          created_at: string
+          details_agreed: boolean
+          disclaimer_agreed: boolean
+          email: string
+          event_date: string
+          event_name: string
+          id: string
+          package_type: string
+          pax_guest: string | null
+          phone: string
+          postal_code: string | null
+          price: string | null
+          province: string | null
+          receipt_file_name: string | null
+          receipt_file_url: string | null
+          start_time: string
+          street_address: string | null
+          theme_file_name: string | null
+          theme_file_url: string | null
+          theme_motif: string | null
+          venue: string
+        }
+        Insert: {
+          barangay?: string | null
+          booking_number: string
+          booth_package: string
+          city?: string | null
+          client_name: string
+          created_at?: string
+          details_agreed?: boolean
+          disclaimer_agreed?: boolean
+          email: string
+          event_date: string
+          event_name: string
+          id?: string
+          package_type: string
+          pax_guest?: string | null
+          phone: string
+          postal_code?: string | null
+          price?: string | null
+          province?: string | null
+          receipt_file_name?: string | null
+          receipt_file_url?: string | null
+          start_time: string
+          street_address?: string | null
+          theme_file_name?: string | null
+          theme_file_url?: string | null
+          theme_motif?: string | null
+          venue: string
+        }
+        Update: {
+          barangay?: string | null
+          booking_number?: string
+          booth_package?: string
+          city?: string | null
+          client_name?: string
+          created_at?: string
+          details_agreed?: boolean
+          disclaimer_agreed?: boolean
+          email?: string
+          event_date?: string
+          event_name?: string
+          id?: string
+          package_type?: string
+          pax_guest?: string | null
+          phone?: string
+          postal_code?: string | null
+          price?: string | null
+          province?: string | null
+          receipt_file_name?: string | null
+          receipt_file_url?: string | null
+          start_time?: string
+          street_address?: string | null
+          theme_file_name?: string | null
+          theme_file_url?: string | null
+          theme_motif?: string | null
+          venue?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

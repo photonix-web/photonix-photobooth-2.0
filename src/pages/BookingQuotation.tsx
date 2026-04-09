@@ -4,7 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Upload, X, FileText, CreditCard } from "lucide-react";
+import { Upload, X, FileText, CreditCard, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const priceMap: Record<string, Record<string, string>> = {
   Basic: { "4R": "₱4,000", Photostrip: "₱4,500", Polaroid: "₱4,500", "5 Frames": "₱5,000" },
@@ -14,21 +16,23 @@ const priceMap: Record<string, Record<string, string>> = {
 };
 
 const generateBookingNumber = () => {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let result = "PTX-";
-  for (let i = 0; i < 6; i++) result += chars.charAt(Math.floor(Math.random() * chars.length));
-  return result;
+  const now = new Date();
+  const year = now.getFullYear();
+  const seq = Math.floor(Math.random() * 99999).toString().padStart(5, "0");
+  return `PX-${year}-${seq}`;
 };
 
 const BookingQuotation = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const data = location.state as Record<string, string> | null;
 
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [detailsChecked, setDetailsChecked] = useState(false);
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [receiptPreview, setReceiptPreview] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const receiptInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -61,14 +65,80 @@ const BookingQuotation = () => {
     if (receiptInputRef.current) receiptInputRef.current.value = "";
   };
 
-  const canSubmit = disclaimerChecked && detailsChecked && receiptFile;
+  const canSubmit = disclaimerChecked && detailsChecked && receiptFile && !isSubmitting;
 
-  const handleSubmit = () => {
-    if (!canSubmit) return;
-    const bookingNumber = generateBookingNumber();
-    navigate("/book/confirmed", {
-      state: { bookingNumber, email: data.email, eventName: data.eventName },
-    });
+  const uploadFile = async (file: File, folder: string) => {
+    const ext = file.name.split(".").pop();
+    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { error } = await supabase.storage.from("booking-files").upload(fileName, file);
+    if (error) throw error;
+    const { data: urlData } = supabase.storage.from("booking-files").getPublicUrl(fileName);
+    return urlData.publicUrl;
+  };
+
+  const handleSubmit = async () => {
+    if (!canSubmit || !receiptFile) return;
+    setIsSubmitting(true);
+
+    try {
+      const bookingNumber = generateBookingNumber();
+
+      // Upload receipt
+      const receiptUrl = await uploadFile(receiptFile, "receipts");
+
+      // Upload theme file if exists
+      let themeFileUrl: string | null = null;
+      if (data.themePreview && data.themeFileName) {
+        // Theme file was passed as base64 from the form — we need to convert and upload
+        const res = await fetch(data.themePreview);
+        const blob = await res.blob();
+        const themeFile = new File([blob], data.themeFileName, { type: blob.type });
+        themeFileUrl = await uploadFile(themeFile, "themes");
+      }
+
+      // Save booking to database
+      const { error } = await supabase.from("bookings").insert({
+        booking_number: bookingNumber,
+        client_name: data.name,
+        email: data.email,
+        phone: data.phone,
+        booth_package: data.booth,
+        package_type: data.packageType,
+        event_name: data.eventName,
+        event_date: eventDate.toISOString().split("T")[0],
+        start_time: data.startTime,
+        venue: data.venue,
+        pax_guest: data.paxGuest || null,
+        theme_motif: data.themeMotif || null,
+        street_address: data.streetAddress || null,
+        barangay: data.barangay || null,
+        city: data.city || null,
+        province: data.province || null,
+        postal_code: data.postalCode || null,
+        price,
+        theme_file_url: themeFileUrl,
+        theme_file_name: data.themeFileName || null,
+        receipt_file_url: receiptUrl,
+        receipt_file_name: receiptFile.name,
+        disclaimer_agreed: true,
+        details_agreed: true,
+      });
+
+      if (error) throw error;
+
+      navigate("/book/confirmed", {
+        state: { bookingNumber, email: data.email, eventName: data.eventName },
+      });
+    } catch (err: any) {
+      console.error("Booking submission error:", err);
+      toast({
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const summaryRows = [
@@ -237,7 +307,11 @@ const BookingQuotation = () => {
             disabled={!canSubmit}
             onClick={handleSubmit}
           >
-            PAYMENT & BOOKING
+            {isSubmitting ? (
+              <><Loader2 size={18} className="animate-spin mr-2" /> SUBMITTING...</>
+            ) : (
+              "PAYMENT & BOOKING"
+            )}
           </Button>
         </div>
       </section>

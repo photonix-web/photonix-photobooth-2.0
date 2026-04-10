@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import FareMatrixNotice from "@/components/FareMatrixNotice";
 import sample4R from "@/assets/sample-4r.png";
 import samplePhotostrip from "@/assets/sample-photostrip.png";
 import sample5Frames from "@/assets/sample-5frames.png";

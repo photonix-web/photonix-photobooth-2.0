@@ -208,10 +208,19 @@ const BookUs = () => {
               <Input value={form.streetAddress} onChange={(e) => setForm({ ...form, streetAddress: e.target.value })} placeholder="Street Address / Building / Lot" required className="bg-background border-border" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input value={form.barangay} onChange={(e) => setForm({ ...form, barangay: e.target.value })} placeholder="Barangay" required className="bg-background border-border" />
-                <Input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="City / Municipality" required className="bg-background border-border" />
+                <Select value={form.city} onValueChange={(v) => setForm({ ...form, city: v })}>
+                  <SelectTrigger className="bg-background border-border">
+                    <SelectValue placeholder="City / Municipality" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(provinceMunicipalities[form.province] || []).map((m) => (
+                      <SelectItem key={m} value={m}>{m}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Select value={form.province} onValueChange={(v) => setForm({ ...form, province: v })}>
+              <Select value={form.province} onValueChange={(v) => setForm({ ...form, province: v, city: "" })}>
                   <SelectTrigger className="bg-background border-border">
                     <SelectValue placeholder="Province" />
                   </SelectTrigger>

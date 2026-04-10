@@ -36,33 +36,33 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section
-        className="relative min-h-[70vh] flex items-start pt-8 sm:pt-12 md:items-center md:pt-0 section-padding overflow-hidden pb-0 sm:pb-8"
+        className="relative min-h-[90vh] md:min-h-[70vh] flex flex-col items-center justify-start pt-8 md:flex-row md:items-center md:justify-start md:pt-0 section-padding overflow-hidden pb-0"
       >
         <img
           src={heroImage}
           alt=""
-          className="absolute left-[48%] -translate-x-1/2 bottom-0 w-auto h-[55%] sm:h-[60%] md:translate-x-0 md:left-auto md:right-[-25px] md:h-[120%] md:bottom-[-25px] object-contain object-bottom md:object-center"
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-auto h-[42%] md:translate-x-0 md:left-auto md:right-[-25px] md:h-[120%] md:bottom-[-25px] object-contain object-bottom md:object-center"
         />
         <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-xl"
+            className="max-w-xl flex flex-col items-center md:items-start"
           >
-            <img src={logo} alt="Photonix Photobooth" className="h-28 md:h-36 mb-3 sm:mb-4 md:mb-6" />
-            <p className="text-muted-foreground text-lg max-w-md leading-relaxed text-center md:text-left">
-              Your mobile pop-up photobooth — making your events memorable.
+            <img src={logo} alt="Photonix Photobooth" className="h-28 md:h-36 mb-3 md:mb-6" />
+            <p className="text-muted-foreground text-lg md:text-xl max-w-md leading-relaxed text-center md:text-left">
+              Your mobile pop-up photobooth – making your events memorable.
             </p>
-            <div className="flex gap-4 mt-4 sm:mt-5 md:mt-8">
-              <Button asChild size="lg" className="font-heading tracking-widest">
+            <div className="flex flex-col w-full max-w-xs md:max-w-none md:flex-row gap-3 md:gap-4 mt-5 md:mt-8">
+              <Button asChild size="lg" className="font-heading tracking-widest w-full md:w-auto">
                 <Link to="/book">BOOK NOW</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="font-heading tracking-widest border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button asChild variant="outline" size="lg" className="font-heading tracking-widest border-primary text-primary hover:bg-primary hover:text-primary-foreground w-full md:w-auto">
                 <Link to="/services">OUR SERVICES</Link>
               </Button>
             </div>
-            <div className="flex gap-6 mt-4 sm:mt-5 md:mt-8 text-sm text-muted-foreground">
+            <div className="flex flex-col md:flex-row items-center gap-1 md:gap-6 mt-5 md:mt-8 text-sm text-muted-foreground">
               <a href="https://www.facebook.com/photonixphotobooth" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">facebook.com/photonixphotobooth</a>
               <a href="https://www.instagram.com/photonixbooth/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@photonixbooth</a>
             </div>

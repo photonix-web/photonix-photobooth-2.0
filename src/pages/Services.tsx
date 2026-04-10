@@ -174,7 +174,9 @@ const Services = () => (
           ))}
         </div>
 
-        {/* Sample photos placeholder */}
+        <FareMatrixNotice />
+
+        {/* Sample photos */}
         <div className="mt-16">
           <h2 className="font-heading text-3xl font-bold text-center mb-8">
             SAMPLE <span className="text-primary">PHOTOS</span>

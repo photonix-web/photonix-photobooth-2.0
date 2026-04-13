@@ -50,7 +50,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Maco", "New Bataan", "Montevista", "Mawab", "Nabunturan", "Compostela", "Laak", "Maragusan", "Pantukan"],
-    price: "₱1,000",
+    price: "₱1,750",
     priceNote: "round-trip, per booking",
   },
   {

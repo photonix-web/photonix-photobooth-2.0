@@ -28,7 +28,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Asuncion", "Sto. Tomas", "Carmen", "Panabo City", "New Corella", "Kapalong", "San Isidro"],
-    price: "₱500",
+    price: "₱1,000",
     priceNote: "round-trip, per booking",
   },
   {
@@ -39,7 +39,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Braulio E. Dujali", "Talaingod", "Island Garden City of Samal (IGACOS)"],
-    price: "₱800",
+    price: "₱1,500",
     priceNote: "round-trip, per booking",
   },
   {
@@ -50,7 +50,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Maco", "New Bataan", "Montevista", "Mawab", "Nabunturan", "Compostela", "Laak", "Maragusan", "Pantukan"],
-    price: "₱1,000",
+    price: "₱1,750",
     priceNote: "round-trip, per booking",
   },
   {
@@ -61,7 +61,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Poblacion", "Buhangin", "Talomo", "Toril", "Calinan", "Baguio District", "Tugbok", "Marilog"],
-    price: "₱1,500",
+    price: "₱2,000",
     priceNote: "round-trip, per booking",
   },
   {
@@ -72,7 +72,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Mati City", "Cateel", "Baganga", "Caraga", "Boston", "Manay", "Tarragona", "San Isidro", "Governor Generoso"],
-    price: "₱2,000",
+    price: "₱3,000",
     priceNote: "round-trip, per booking",
   },
   {
@@ -83,7 +83,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Bukidnon", "Cotabato", "South Cotabato", "Agusan del Sur", "Sultan Kudarat", "Sarangani", "General Santos City"],
-    price: "₱3,000+",
+    price: "₱4,000+",
     priceNote: "to be quoted upon inquiry",
   },
 ];
@@ -116,9 +116,10 @@ const FareMatrixNotice = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="font-heading text-2xl">
+            <DialogTitle className="font-heading text-2xl tracking-widest uppercase">
               Transportation Fare Matrix
             </DialogTitle>
+            <p className="text-sm text-muted-foreground mt-1">Add-on fare*</p>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {fareZones.map((zone, i) => (

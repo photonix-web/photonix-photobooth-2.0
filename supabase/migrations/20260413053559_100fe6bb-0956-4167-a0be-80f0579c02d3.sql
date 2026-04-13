@@ -1,0 +1,1 @@
+ALTER TABLE public.bookings ADD COLUMN backdrop_color text;

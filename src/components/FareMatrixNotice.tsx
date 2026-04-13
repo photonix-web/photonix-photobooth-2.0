@@ -83,7 +83,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Bukidnon", "Cotabato", "South Cotabato", "Agusan del Sur", "Sultan Kudarat", "Sarangani", "General Santos City"],
-    price: "₱3,000+",
+    price: "₱4,000+",
     priceNote: "to be quoted upon inquiry",
   },
 ];

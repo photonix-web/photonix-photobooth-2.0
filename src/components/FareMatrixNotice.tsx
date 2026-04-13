@@ -28,7 +28,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Asuncion", "Sto. Tomas", "Carmen", "Panabo City", "New Corella", "Kapalong", "San Isidro"],
-    price: "₱500",
+    price: "₱1,000",
     priceNote: "round-trip, per booking",
   },
   {

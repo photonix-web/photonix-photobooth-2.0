@@ -39,7 +39,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Braulio E. Dujali", "Talaingod", "Island Garden City of Samal (IGACOS)"],
-    price: "₱800",
+    price: "₱1,500",
     priceNote: "round-trip, per booking",
   },
   {

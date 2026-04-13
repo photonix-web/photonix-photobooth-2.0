@@ -164,6 +164,7 @@ const BookingQuotation = () => {
     { label: "Venue", value: data.venue },
     { label: "Pax / Guest", value: data.paxGuest },
     { label: "Theme / Motif", value: data.themeMotif || "—" },
+    { label: "Backdrop Color", value: data.backdropColor || "—" },
   ];
 
   return (

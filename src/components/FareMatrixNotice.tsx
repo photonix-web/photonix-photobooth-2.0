@@ -61,7 +61,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Poblacion", "Buhangin", "Talomo", "Toril", "Calinan", "Baguio District", "Tugbok", "Marilog"],
-    price: "₱1,500",
+    price: "₱2,000",
     priceNote: "round-trip, per booking",
   },
   {

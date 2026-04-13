@@ -67,12 +67,17 @@ const BookingQuotation = () => {
 
   const canSubmit = disclaimerChecked && detailsChecked && receiptFile && !isSubmitting;
 
-  const uploadFile = async (file: File, folder: string) => {
-    const ext = file.name.split(".").pop();
-    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const { error } = await supabase.storage.from("booking-files").upload(fileName, file);
+  const formatFileName = (fullName: string, date: Date, type: "RECEIPT" | "THEME", ext: string) => {
+    const sanitized = fullName.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9-]/g, "").toUpperCase();
+    const dateStr = `${(date.getMonth() + 1).toString().padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}${date.getFullYear()}`;
+    return `${sanitized}-${dateStr}-${type}.${ext}`;
+  };
+
+  const uploadFile = async (file: File, folder: string, formattedName: string) => {
+    const filePath = `${folder}/${formattedName}`;
+    const { error } = await supabase.storage.from("booking-files").upload(filePath, file);
     if (error) throw error;
-    const { data: urlData } = supabase.storage.from("booking-files").getPublicUrl(fileName);
+    const { data: urlData } = supabase.storage.from("booking-files").getPublicUrl(filePath);
     return urlData.publicUrl;
   };
 
@@ -84,16 +89,20 @@ const BookingQuotation = () => {
       const bookingNumber = generateBookingNumber();
 
       // Upload receipt
-      const receiptUrl = await uploadFile(receiptFile, "receipts");
+      const receiptExt = receiptFile.name.split(".").pop() || "jpg";
+      const receiptFormattedName = formatFileName(data.name, eventDate, "RECEIPT", receiptExt);
+      const receiptUrl = await uploadFile(receiptFile, "receipts", receiptFormattedName);
 
       // Upload theme file if exists
       let themeFileUrl: string | null = null;
+      let themeFormattedName: string | null = null;
       if (data.themePreview && data.themeFileName) {
-        // Theme file was passed as base64 from the form — we need to convert and upload
         const res = await fetch(data.themePreview);
         const blob = await res.blob();
-        const themeFile = new File([blob], data.themeFileName, { type: blob.type });
-        themeFileUrl = await uploadFile(themeFile, "themes");
+        const themeExt = data.themeFileName.split(".").pop() || "jpg";
+        themeFormattedName = formatFileName(data.name, eventDate, "THEME", themeExt);
+        const themeFile = new File([blob], themeFormattedName, { type: blob.type });
+        themeFileUrl = await uploadFile(themeFile, "themes", themeFormattedName);
       }
 
       // Save booking to database
@@ -117,9 +126,10 @@ const BookingQuotation = () => {
         postal_code: data.postalCode || null,
         price,
         theme_file_url: themeFileUrl,
-        theme_file_name: data.themeFileName || null,
+        theme_file_name: themeFormattedName || null,
         receipt_file_url: receiptUrl,
-        receipt_file_name: receiptFile.name,
+        receipt_file_name: receiptFormattedName,
+        backdrop_color: data.backdropColor || null,
         disclaimer_agreed: true,
         details_agreed: true,
       });

@@ -41,7 +41,7 @@ const Index = () => {
         <img
           src={heroImageFinal}
           alt=""
-          className="  absolute bottom-0 left-1/2 -translate-x-1/2 h-[45%] w-auto object-contain object-bottom md:left-auto md:translate-x-0 md:right-[-20px] md:bottom-0 md:h-[110%] md:max-w-[60%]"
+          className="  absolute bottom-0 left-1/2 -translate-x-1/2 h-[45%] w-auto object-contain object-bottom md:left-auto md:translate-x-0 md:right-[-20px] md:bottom-[-20px] md:h-[110%] md:max-w-[60%]"
         />
         <div className="container mx-auto relative z-10">
           <motion.div

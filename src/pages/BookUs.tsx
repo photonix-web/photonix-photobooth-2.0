@@ -69,7 +69,17 @@ const BookUs = () => {
     venue: "",
     paxGuest: "",
     themeMotif: "",
+    backdropColor: "",
   });
+
+  const backdropOptions: Record<string, string[]> = {
+    Basic: ["Silver Sequins", "Rose Pink Sequins", "Black Sequins", "Off-White", "Red", "Brown", "Burgundy Wine"],
+    Curtain: ["Brown", "Red", "Cream-White"],
+    Classic: ["Red", "Off-White"],
+    "High-Angle": ["Red"],
+  };
+
+  const availableBackdrops = form.booth ? backdropOptions[form.booth] || [] : [];
 
   const handleThemeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -146,7 +156,7 @@ const BookUs = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label className={labelClass}>EVENT PACKAGE *</label>
-                <Select value={form.booth} onValueChange={(v) => setForm({ ...form, booth: v })}>
+                <Select value={form.booth} onValueChange={(v) => setForm({ ...form, booth: v, backdropColor: "" })}>
                   <SelectTrigger className="bg-background border-border">
                     <SelectValue placeholder="Select package" />
                   </SelectTrigger>
@@ -171,6 +181,23 @@ const BookUs = () => {
                 </Select>
               </div>
             </div>
+
+            {/* Backdrop Color */}
+            {form.booth && availableBackdrops.length > 0 && (
+              <div>
+                <label className={labelClass}>BACKDROP COLOR *</label>
+                <Select value={form.backdropColor} onValueChange={(v) => setForm({ ...form, backdropColor: v })}>
+                  <SelectTrigger className="bg-background border-border">
+                    <SelectValue placeholder="Select backdrop color" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableBackdrops.map((c) => (
+                      <SelectItem key={c} value={c}>{c}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
 
             {/* Event Name */}
             <div>
@@ -305,7 +332,7 @@ const BookUs = () => {
               )}
             </div>
 
-            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date || !form.booth || !form.packageType || !form.venue || !form.province}>
+            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date || !form.booth || !form.packageType || !form.venue || !form.province || (availableBackdrops.length > 0 && !form.backdropColor)}>
               PROCEED TO QUOTATION
             </Button>
           </form>

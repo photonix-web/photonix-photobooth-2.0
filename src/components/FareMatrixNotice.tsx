@@ -72,7 +72,7 @@ const fareZones = [
     distance: "",
     description: "",
     municipalities: ["Mati City", "Cateel", "Baganga", "Caraga", "Boston", "Manay", "Tarragona", "San Isidro", "Governor Generoso"],
-    price: "₱2,000",
+    price: "₱3,000",
     priceNote: "round-trip, per booking",
   },
   {

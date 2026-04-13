@@ -116,9 +116,10 @@ const FareMatrixNotice = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="font-heading text-2xl">
+            <DialogTitle className="font-heading text-2xl tracking-widest uppercase">
               Transportation Fare Matrix
             </DialogTitle>
+            <p className="text-sm text-muted-foreground mt-1">Add-on fare*</p>
           </DialogHeader>
           <div className="space-y-3 mt-4">
             {fareZones.map((zone, i) => (

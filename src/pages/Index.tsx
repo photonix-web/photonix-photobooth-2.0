@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import Layout from "@/components/Layout";
-import heroImage from "@/assets/PTX-hero-new.png";
+import heroImageFinal from "@/assets/photonix-hero-final.png";
 import heroGallery from "@/assets/hero-2-new.png";
 import logo from "@/assets/photonix-logo.png";
 import school from "@/assets/school-event.jpg";
@@ -39,7 +39,7 @@ const Index = () => {
         className="relative min-h-[90vh] md:min-h-[70vh] flex flex-col items-center justify-start pt-8 md:flex-row md:items-center md:justify-start md:pt-0 section-padding overflow-hidden pb-0"
       >
         <img
-          src={heroImage}
+          src={heroImageFinal}
           alt=""
           className="absolute left-1/2 -translate-x-1/2 bottom-0 w-auto h-[42%] md:translate-x-0 md:left-auto md:right-[-25px] md:h-[120%] md:bottom-[-25px] object-contain object-bottom md:object-center"
         />

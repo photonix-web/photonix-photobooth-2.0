@@ -48,7 +48,7 @@ const BookingConfirmed = () => {
             </h1>
 
             <p className="text-muted-foreground text-lg mb-4 max-w-lg mx-auto leading-relaxed">
-              Please be on the lookout for any emails for any questions and/or clarification. See you at the event!
+              A confirmation email will be sent within the day. See you at the event!
             </p>
 
             <p className="text-muted-foreground text-sm mb-4 max-w-lg mx-auto leading-relaxed">

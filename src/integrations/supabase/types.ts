@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       bookings: {
         Row: {
+          backdrop_color: string | null
           barangay: string | null
           booking_number: string
           booth_package: string
@@ -44,6 +45,7 @@ export type Database = {
           venue: string
         }
         Insert: {
+          backdrop_color?: string | null
           barangay?: string | null
           booking_number: string
           booth_package: string
@@ -72,6 +74,7 @@ export type Database = {
           venue: string
         }
         Update: {
+          backdrop_color?: string | null
           barangay?: string | null
           booking_number?: string
           booth_package?: string

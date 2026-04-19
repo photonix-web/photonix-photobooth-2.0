@@ -332,7 +332,7 @@ const BookUs = () => {
               )}
             </div>
 
-            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date || !form.booth || !form.packageType || !form.venue || !form.province || (availableBackdrops.length > 0 && !form.backdropColor)}>
+            <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date || !form.booth || !form.packageType || !form.venue || !form.province || !form.city || (availableBackdrops.length > 0 && !form.backdropColor)}>
               PROCEED TO QUOTATION
             </Button>
           </form>

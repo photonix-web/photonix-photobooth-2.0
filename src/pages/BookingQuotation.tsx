@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Upload, X, FileText, CreditCard, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { getTravelFee, formatPHP, parsePriceString } from "@/lib/travelFee";
 
 const priceMap: Record<string, Record<string, string>> = {
   Basic: { "4R": "₱4,000", Photostrip: "₱4,500", Polaroid: "₱4,500", "5 Frames": "₱5,000" },
@@ -43,6 +44,9 @@ const BookingQuotation = () => {
 
   const eventDate = new Date(data.date);
   const price = priceMap[data.booth]?.[data.packageType] || "TBD";
+  const basePrice = parsePriceString(price);
+  const { fee: travelFee, zone: travelZone } = getTravelFee(data.city);
+  const totalPrice = basePrice + travelFee;
   const fullAddress = [data.streetAddress, data.barangay, data.city, data.province, data.postalCode].filter(Boolean).join(", ");
 
   const handleReceiptUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +128,7 @@ const BookingQuotation = () => {
         city: data.city || null,
         province: data.province || null,
         postal_code: data.postalCode || null,
-        price,
+        price: formatPHP(totalPrice),
         theme_file_url: themeFileUrl,
         theme_file_name: themeFormattedName || null,
         receipt_file_url: receiptUrl,
@@ -206,14 +210,22 @@ const BookingQuotation = () => {
             )}
 
             {/* Price Quotation */}
-            <div className="mt-6 pt-6 border-t border-border">
-              <div className="flex justify-between items-center">
-                <span className="font-heading tracking-widest text-lg">TOTAL</span>
-                <span className="font-heading text-2xl md:text-3xl font-bold text-primary">{price}</span>
+            <div className="mt-6 pt-6 border-t border-border space-y-3">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-muted-foreground">{data.booth} Package — {data.packageType}</span>
+                <span className="text-foreground">{formatPHP(basePrice)}</span>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                {data.booth} Package — {data.packageType}
-              </p>
+              <div className="flex justify-between items-start text-sm">
+                <div className="flex flex-col">
+                  <span className="text-muted-foreground">Travel Fee (Based on Event Location)</span>
+                  <span className="text-xs text-muted-foreground/70 italic">{data.city ? `${data.city} — ${travelZone}` : travelZone}</span>
+                </div>
+                <span className="text-foreground">{formatPHP(travelFee)}</span>
+              </div>
+              <div className="flex justify-between items-center pt-3 border-t border-border">
+                <span className="font-heading tracking-widest text-lg">TOTAL</span>
+                <span className="font-heading text-2xl md:text-3xl font-bold text-primary">{formatPHP(totalPrice)}</span>
+              </div>
             </div>
           </div>
 

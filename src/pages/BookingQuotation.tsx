@@ -142,6 +142,40 @@ const BookingQuotation = () => {
 
       if (error) throw error;
 
+      // Send confirmation + admin notification emails (non-blocking for navigation)
+      try {
+        await supabase.functions.invoke("send-booking-emails", {
+          body: {
+            bookingNumber,
+            clientName: data.name,
+            email: data.email,
+            phone: data.phone,
+            booth: data.booth,
+            packageType: data.packageType,
+            eventName: data.eventName,
+            eventDate: eventDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }),
+            startTime: data.startTime,
+            venue: data.venue,
+            fullAddress,
+            paxGuest: data.paxGuest || "",
+            themeMotif: data.themeMotif || "",
+            backdropColor: data.backdropColor || "",
+            basePrice: formatPHP(basePrice),
+            travelFee: formatPHP(travelFee),
+            travelZone,
+            totalPrice: formatPHP(totalPrice),
+            paymentMethod: "GCash / UnionBank QR",
+            submittedAt: new Date().toLocaleString("en-PH", { dateStyle: "long", timeStyle: "short" }),
+            themeFileName: themeFormattedName,
+            themeFileUrl,
+            receiptFileName: receiptFormattedName,
+            receiptFileUrl,
+          },
+        });
+      } catch (emailErr) {
+        console.error("Email send failed (booking still saved):", emailErr);
+      }
+
       navigate("/book/confirmed", {
         state: { bookingNumber, email: data.email, eventName: data.eventName },
       });

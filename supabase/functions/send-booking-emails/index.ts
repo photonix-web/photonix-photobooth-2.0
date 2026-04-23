@@ -31,6 +31,7 @@ interface BookingPayload {
   themeFileUrl?: string | null;
   receiptFileName?: string | null;
   receiptFileUrl?: string | null;
+  addOnsSummary?: string;
 }
 
 const escapeHtml = (s: string) =>
@@ -65,6 +66,7 @@ const buildDetailsTable = (b: BookingPayload) => `
     ${row("Backdrop Color", b.backdropColor || "—")}
     ${row("Pax / Guest", b.paxGuest || "—")}
     ${row("Theme / Motif", b.themeMotif || "—")}
+    ${row("Add-ons", b.addOnsSummary || "None")}
     ${row("Add-ons (Travel Fee)", `${b.travelFee} (${b.travelZone})`)}
     ${row("Base Price", b.basePrice)}
     ${row("TOTAL QUOTATION", b.totalPrice)}

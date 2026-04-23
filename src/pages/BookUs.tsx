@@ -5,7 +5,8 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
-import { CalendarDays, Upload, X, Image, Loader2 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CalendarDays, Upload, X, Image, Loader2, Plus, Minus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Select,
@@ -84,6 +85,9 @@ const BookUs = () => {
     themeMotif: "",
     backdropColor: "",
   });
+  const [extensionEnabled, setExtensionEnabled] = useState(false);
+  const [extensionHours, setExtensionHours] = useState(1);
+  const [unlimitedPrinting, setUnlimitedPrinting] = useState(false);
 
   // Fetch calendar availability for the next 6 months
   useEffect(() => {
@@ -166,6 +170,9 @@ const BookUs = () => {
       date: date.toISOString(),
       themeFileName: themeFile?.name || null,
       themePreview,
+      extensionEnabled,
+      extensionHours: extensionEnabled ? extensionHours : 0,
+      unlimitedPrinting,
     };
 
     navigate("/book/quotation", { state: bookingData });
@@ -405,6 +412,76 @@ const BookUs = () => {
                   </button>
                 </div>
               )}
+            </div>
+
+            {/* Add-ons (Optional) */}
+            <div className="bg-background border border-border rounded-lg p-5 space-y-4">
+              <div>
+                <label className={labelClass}>ADD-ONS (OPTIONAL)</label>
+                <p className="text-xs text-muted-foreground -mt-1">Enhance your booking with optional extras.</p>
+              </div>
+
+              {/* Extension */}
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    id="extension"
+                    checked={extensionEnabled}
+                    onCheckedChange={(v) => setExtensionEnabled(v === true)}
+                    className="mt-0.5"
+                  />
+                  <label htmlFor="extension" className="text-sm text-foreground cursor-pointer leading-relaxed flex-1">
+                    <span className="font-medium">Extension</span>{" "}
+                    <span className="text-muted-foreground">(₱2,500 per hour)</span>
+                  </label>
+                </div>
+                {extensionEnabled && (
+                  <div className="ml-7 flex flex-wrap items-center gap-3">
+                    <span className="text-xs text-muted-foreground font-heading tracking-widest">HOURS</span>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => setExtensionHours((h) => Math.max(1, h - 1))}
+                        disabled={extensionHours <= 1}
+                        aria-label="Decrease hours"
+                      >
+                        <Minus size={14} />
+                      </Button>
+                      <span className="w-8 text-center text-sm font-medium tabular-nums">{extensionHours}</span>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => setExtensionHours((h) => h + 1)}
+                        aria-label="Increase hours"
+                      >
+                        <Plus size={14} />
+                      </Button>
+                    </div>
+                    <span className="text-sm text-foreground">
+                      = ₱{(2500 * extensionHours).toLocaleString()}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Unlimited Printing */}
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="unlimited-printing"
+                  checked={unlimitedPrinting}
+                  onCheckedChange={(v) => setUnlimitedPrinting(v === true)}
+                  className="mt-0.5"
+                />
+                <label htmlFor="unlimited-printing" className="text-sm text-foreground cursor-pointer leading-relaxed flex-1">
+                  <span className="font-medium">Unlimited Printing</span>{" "}
+                  <span className="text-muted-foreground">(₱2,000)</span>
+                </label>
+              </div>
             </div>
 
             <Button type="submit" size="lg" className="w-full font-heading tracking-widest mt-4" disabled={!date || !form.booth || !form.packageType || !form.venue || !form.province || !form.city || (availableBackdrops.length > 0 && !form.backdropColor)}>

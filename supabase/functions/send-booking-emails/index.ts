@@ -3,7 +3,7 @@ import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
 const FROM_ADDRESS =
   Deno.env.get("BOOKING_EMAIL_FROM") ||
-  "Photonix Photo Booth <noreply@booking.photonixphotobooth.com>";
+  "Photonix Photo Booth <bookings@photonixphotobooth.com>";
 const ADMIN_EMAIL = "photonix.biz@gmail.com";
 
 interface BookingPayload {

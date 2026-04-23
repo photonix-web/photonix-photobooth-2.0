@@ -1,7 +1,9 @@
 import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
-const FROM_ADDRESS = "Photonix Photo Booth <onboarding@resend.dev>";
+const FROM_ADDRESS =
+  Deno.env.get("BOOKING_EMAIL_FROM") ||
+  "Photonix Photo Booth <noreply@booking.photonixphotobooth.com>";
 const ADMIN_EMAIL = "photonix.biz@gmail.com";
 
 interface BookingPayload {

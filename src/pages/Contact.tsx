@@ -6,15 +6,36 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message sent!", description: "We'll get back to you soon." });
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-inquiry", {
+        body: form,
+      });
+      if (error) throw error;
+      toast({
+        title: "Message sent!",
+        description: "Thank you for your email. We'll respond as soon as possible.",
+      });
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Could not send message",
+        description: "Please try again or message us on Messenger.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -82,8 +103,8 @@ const Contact = () => {
                   className="bg-card border-border"
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full font-heading tracking-widest">
-                SEND MESSAGE
+              <Button type="submit" size="lg" disabled={submitting} className="w-full font-heading tracking-widest">
+                {submitting ? "SENDING..." : "SEND MESSAGE"}
               </Button>
             </motion.form>
 

@@ -218,12 +218,17 @@ const BookUs = () => {
                 <label className={labelClass}>EVENT PACKAGE *</label>
                 <Select value={form.booth} onValueChange={(v) => setForm({ ...form, booth: v, backdropColor: "" })}>
                   <SelectTrigger className="bg-background border-border">
-                    <SelectValue placeholder="Select package" />
+                    <SelectValue placeholder={selectedYMD ? "Select package" : "Select a date first"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {boothOptions.map((o) => (
-                      <SelectItem key={o} value={o}>{o}</SelectItem>
-                    ))}
+                    {boothOptions.map((o) => {
+                      const avail = isBoothAvailable(o);
+                      return (
+                        <SelectItem key={o} value={o} disabled={!avail}>
+                          {o}{!avail ? " — Already booked for this date" : ""}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
               </div>

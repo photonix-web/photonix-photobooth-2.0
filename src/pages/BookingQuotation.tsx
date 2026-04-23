@@ -273,23 +273,29 @@ const BookingQuotation = () => {
               Scan any of the QR codes below to send your payment, then upload the receipt.
             </p>
 
-            {/* QR Placeholders */}
+            {/* QR Codes — hover to zoom on desktop for easier scanning */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="bg-background border border-border rounded-lg p-6 text-center">
-                <img
-                  src={gcashQR}
-                  alt="GCash payment QR code for Photonix"
-                  className="w-48 h-48 mx-auto object-contain rounded-lg mb-3"
-                />
+              <div className="bg-background border border-border rounded-lg p-6 text-center group relative overflow-visible">
+                <div className="w-48 h-48 mx-auto mb-3 relative">
+                  <img
+                    src={gcashQR}
+                    alt="GCash payment QR code for Photonix"
+                    className="w-48 h-48 object-contain rounded-lg transition-transform duration-300 md:group-hover:scale-[2] md:group-hover:relative md:group-hover:z-30 md:group-hover:shadow-2xl bg-white"
+                  />
+                </div>
                 <p className="font-heading text-sm tracking-widest">GCash</p>
+                <p className="text-xs text-muted-foreground mt-1 hidden md:block">Hover to zoom</p>
               </div>
-              <div className="bg-background border border-border rounded-lg p-6 text-center">
-                <img
-                  src={unionbankQR}
-                  alt="UnionBank QR Ph payment code for Photonix Photo Booth Services"
-                  className="w-48 h-48 mx-auto object-contain rounded-lg mb-3"
-                />
+              <div className="bg-background border border-border rounded-lg p-6 text-center group relative overflow-visible">
+                <div className="w-48 h-48 mx-auto mb-3 relative">
+                  <img
+                    src={unionbankQR}
+                    alt="UnionBank QR Ph payment code for Photonix Photo Booth Services"
+                    className="w-48 h-48 object-contain rounded-lg transition-transform duration-300 md:group-hover:scale-[2] md:group-hover:relative md:group-hover:z-30 md:group-hover:shadow-2xl bg-white"
+                  />
+                </div>
                 <p className="font-heading text-sm tracking-widest">UnionBank</p>
+                <p className="text-xs text-muted-foreground mt-1 hidden md:block">Hover to zoom</p>
               </div>
             </div>
 

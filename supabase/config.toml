@@ -2,3 +2,9 @@ project_id = "mpafkejisaqyffzmdcet"
 
 [functions.process-email-queue]
 verify_jwt = true
+
+[functions.calendar-availability]
+verify_jwt = false
+
+[functions.calendar-create-event]
+verify_jwt = false

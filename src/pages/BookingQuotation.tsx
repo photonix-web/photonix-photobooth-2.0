@@ -176,6 +176,31 @@ const BookingQuotation = () => {
         console.error("Email send failed (booking still saved):", emailErr);
       }
 
+      // Create Google Calendar event (non-blocking)
+      try {
+        await supabase.functions.invoke("calendar-create-event", {
+          body: {
+            bookingNumber,
+            clientName: data.name,
+            email: data.email,
+            phone: data.phone,
+            booth: data.booth,
+            packageType: data.packageType,
+            eventName: data.eventName,
+            eventDate: eventDate.toISOString().split("T")[0],
+            startTime: data.startTime,
+            durationHours: 4,
+            fullAddress,
+            paxGuest: data.paxGuest || "",
+            themeMotif: data.themeMotif || "",
+            backdropColor: data.backdropColor || "",
+            totalPrice: formatPHP(totalPrice),
+          },
+        });
+      } catch (calErr) {
+        console.error("Calendar event creation failed (booking still saved):", calErr);
+      }
+
       navigate("/book/confirmed", {
         state: { bookingNumber, email: data.email, eventName: data.eventName },
       });

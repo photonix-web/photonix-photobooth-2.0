@@ -11,12 +11,17 @@ import boothBasicFinal from "@/assets/Basic-Final.png";
 import boothCurtainFinal from "@/assets/Curtain-Final.png";
 import boothClassicFinal from "@/assets/Classic-Final.png";
 import boothHighangleFinal from "@/assets/High-Angle-Final.png";
+import boothBasicHover from "@/assets/Basic-Hover.jpg";
+import boothCurtainHover from "@/assets/Curtain-Hover.jpg";
+import boothClassicHover from "@/assets/Classic-Hover.jpg";
+import boothHighangleHover from "@/assets/High-Angle-Hover.jpg";
 
 const booths = [
   {
     name: "Basic",
     subtitle: "Backdrop + Stand only",
     image: boothBasicFinal,
+    hoverImage: boothBasicHover,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱4,000" },
       { format: "Photostrip / Polaroid", price: "₱4,500" },
@@ -38,6 +43,7 @@ const booths = [
     name: "Curtain",
     subtitle: "Curtain Photobooth",
     image: boothCurtainFinal,
+    hoverImage: boothCurtainHover,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱6,000" },
       { format: "Photostrip / Polaroid", price: "₱6,500" },
@@ -59,6 +65,7 @@ const booths = [
     name: "Classic",
     subtitle: "Boxed Retro Style Photobooth",
     image: boothClassicFinal,
+    hoverImage: boothClassicHover,
     popular: true,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱10,000" },
@@ -82,6 +89,7 @@ const booths = [
     name: "High-Angle",
     subtitle: "High-Angle Photobooth",
     image: boothHighangleFinal,
+    hoverImage: boothHighangleHover,
     prices: [
       { format: "4R Style (4\" × 6\")", price: "₱12,000" },
       { format: "Photostrip / Polaroid", price: "₱12,500" },
@@ -133,11 +141,16 @@ const Services = () => (
                   MOST POPULAR
                 </div>
               )}
-              <div className="w-full h-48 overflow-hidden">
+              <div className="relative w-full h-48 overflow-hidden group/img">
                 <img
                   src={booth.image}
                   alt={booth.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-opacity duration-300 group-hover/img:opacity-0"
+                />
+                <img
+                  src={booth.hoverImage}
+                  alt={`${booth.name} sample photos`}
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover/img:opacity-100"
                 />
                 </div>
               <div className="p-6">

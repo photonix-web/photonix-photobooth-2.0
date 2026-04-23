@@ -8,6 +8,8 @@ import { Upload, X, FileText, CreditCard, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { getTravelFee, formatPHP, parsePriceString } from "@/lib/travelFee";
+import gcashQR from "@/assets/gcash_qr.jpg";
+import unionbankQR from "@/assets/unionbank_qr.jpg";
 
 const priceMap: Record<string, Record<string, string>> = {
   Basic: { "4R": "₱4,000", Photostrip: "₱4,500", Polaroid: "₱4,500", "5 Frames": "₱5,000" },
@@ -274,15 +276,19 @@ const BookingQuotation = () => {
             {/* QR Placeholders */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div className="bg-background border border-border rounded-lg p-6 text-center">
-                <div className="w-40 h-40 mx-auto bg-muted rounded-lg flex items-center justify-center mb-3">
-                  <span className="text-muted-foreground text-xs font-heading tracking-widest">GCASH QR</span>
-                </div>
+                <img
+                  src={gcashQR}
+                  alt="GCash payment QR code for Photonix"
+                  className="w-48 h-48 mx-auto object-contain rounded-lg mb-3"
+                />
                 <p className="font-heading text-sm tracking-widest">GCash</p>
               </div>
               <div className="bg-background border border-border rounded-lg p-6 text-center">
-                <div className="w-40 h-40 mx-auto bg-muted rounded-lg flex items-center justify-center mb-3">
-                  <span className="text-muted-foreground text-xs font-heading tracking-widest">UNIONBANK QR</span>
-                </div>
+                <img
+                  src={unionbankQR}
+                  alt="UnionBank QR Ph payment code for Photonix Photo Booth Services"
+                  className="w-48 h-48 mx-auto object-contain rounded-lg mb-3"
+                />
                 <p className="font-heading text-sm tracking-widest">UnionBank</p>
               </div>
             </div>

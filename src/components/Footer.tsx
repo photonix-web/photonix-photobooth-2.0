@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/photonix-logo.png";
 
 const Footer = () => (
@@ -33,8 +34,11 @@ const Footer = () => (
         </div>
       </div>
     </div>
-    <div className="container mx-auto mt-10 pt-6 border-t border-border text-center text-xs text-muted-foreground">
-      © {new Date().getFullYear()} Photonix Photobooth. All rights reserved.
+    <div className="container mx-auto mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+      <span>© {new Date().getFullYear()} Photonix Photobooth. All rights reserved.</span>
+      <Link to="/privacy-policy" className="hover:text-primary transition-colors">
+        Privacy Policy
+      </Link>
     </div>
   </footer>
 );

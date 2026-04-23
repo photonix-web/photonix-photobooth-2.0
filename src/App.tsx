@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import BookUs from "./pages/BookUs";
 import BookingQuotation from "./pages/BookingQuotation";
 import BookingConfirmed from "./pages/BookingConfirmed";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/book" element={<BookUs />} />
           <Route path="/book/quotation" element={<BookingQuotation />} />
           <Route path="/book/confirmed" element={<BookingConfirmed />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

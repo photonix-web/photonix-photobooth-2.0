@@ -128,6 +128,19 @@ const BookUs = () => {
 
   const availableBackdrops = form.booth ? backdropOptions[form.booth] || [] : [];
 
+  // Clear booth when it becomes unavailable on selected date
+  useEffect(() => {
+    if (form.booth && !isBoothAvailable(form.booth)) {
+      setForm((f) => ({ ...f, booth: "", backdropColor: "" }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedYMD, availability]);
+
+  const dateUnavailable = selectedYMD ? blockedDateSet.has(selectedYMD) : false;
+  const dateUnavailableReason = selectedYMD
+    ? availability?.blockedDates.find((b) => b.date === selectedYMD)?.reason
+    : undefined;
+
   const handleThemeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {

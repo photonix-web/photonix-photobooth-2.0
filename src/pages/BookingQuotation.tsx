@@ -173,6 +173,11 @@ const BookingQuotation = () => {
             venue: data.venue,
             fullAddress,
             paxGuest: data.paxGuest || "",
+            extensionHours,
+            extensionTotal: extensionTotal ? formatPHP(extensionTotal) : "",
+            unlimitedPrinting: !!data.unlimitedPrinting,
+            unlimitedPrintingTotal: unlimitedPrintingTotal ? formatPHP(unlimitedPrintingTotal) : "",
+            addOnsSummary,
             themeMotif: data.themeMotif || "",
             backdropColor: data.backdropColor || "",
             basePrice: formatPHP(basePrice),
@@ -245,6 +250,7 @@ const BookingQuotation = () => {
     { label: "Pax / Guest", value: data.paxGuest },
     { label: "Theme / Motif", value: data.themeMotif || "—" },
     { label: "Backdrop Color", value: data.backdropColor || "—" },
+    { label: "Add-ons", value: addOnsSummary },
   ];
 
   return (
@@ -298,6 +304,18 @@ const BookingQuotation = () => {
                 </div>
                 <span className="text-foreground">{formatPHP(travelFee)}</span>
               </div>
+              {extensionHours > 0 && (
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-muted-foreground">Extension — {extensionHours} hour{extensionHours > 1 ? "s" : ""} (₱2,500/hr)</span>
+                  <span className="text-foreground">{formatPHP(extensionTotal)}</span>
+                </div>
+              )}
+              {data.unlimitedPrinting && (
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-muted-foreground">Unlimited Printing</span>
+                  <span className="text-foreground">{formatPHP(2000)}</span>
+                </div>
+              )}
               <div className="flex justify-between items-center pt-3 border-t border-border">
                 <span className="font-heading tracking-widest text-lg">TOTAL</span>
                 <span className="font-heading text-2xl md:text-3xl font-bold text-primary">{formatPHP(totalPrice)}</span>

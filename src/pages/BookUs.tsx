@@ -280,16 +280,26 @@ const BookUs = () => {
                   mode="single"
                   selected={date}
                   onSelect={setDate}
-                  disabled={(d) => d < minDate}
+                  disabled={(d) => d < minDate || blockedDateSet.has(toManilaYMD(d))}
                   className="pointer-events-auto"
                 />
               </div>
               <p className="text-xs text-muted-foreground mt-2 italic">
                 We only accept and accommodate events booked at least 3 days in advance.
               </p>
-              {date && (
+              {availabilityLoading && (
+                <p className="text-xs text-muted-foreground mt-2 flex items-center gap-2">
+                  <Loader2 size={12} className="animate-spin" /> Loading calendar availability…
+                </p>
+              )}
+              {date && !dateUnavailable && (
                 <p className="text-sm text-foreground mt-2">
                   Selected: {date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+                </p>
+              )}
+              {date && dateUnavailable && (
+                <p className="text-sm text-destructive mt-2">
+                  {dateUnavailableReason === "FULLY_BOOKED" ? "Fully booked — please choose another date." : "This date is unavailable."}
                 </p>
               )}
             </div>

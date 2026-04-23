@@ -48,12 +48,24 @@ const getMinDate = () => {
   return d;
 };
 
+// YYYY-MM-DD in Asia/Manila for a Date
+const toManilaYMD = (d: Date) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Manila", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+
+interface Availability {
+  blockedDates: { date: string; reason: string }[];
+  boothAvailability: Record<string, Record<string, boolean>>;
+  boothLimits: Record<string, number>;
+}
+
 const BookUs = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState<Date | undefined>();
   const [themeFile, setThemeFile] = useState<File | null>(null);
   const [themePreview, setThemePreview] = useState<string | null>(null);
   const themeInputRef = useRef<HTMLInputElement>(null);
+  const [availability, setAvailability] = useState<Availability | null>(null);
+  const [availabilityLoading, setAvailabilityLoading] = useState(true);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -72,6 +84,40 @@ const BookUs = () => {
     themeMotif: "",
     backdropColor: "",
   });
+
+  // Fetch calendar availability for the next 6 months
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke("calendar-availability");
+        if (cancelled) return;
+        if (error) throw error;
+        if (data?.success) setAvailability(data as Availability);
+      } catch (err) {
+        console.error("Failed to load calendar availability:", err);
+      } finally {
+        if (!cancelled) setAvailabilityLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  const blockedDateSet = useMemo(() => {
+    const s = new Set<string>();
+    availability?.blockedDates.forEach((b) => s.add(b.date));
+    return s;
+  }, [availability]);
+
+  const selectedYMD = date ? toManilaYMD(date) : null;
+  const dayBoothAvail = selectedYMD ? availability?.boothAvailability[selectedYMD] : null;
+
+  // A booth is available if no record exists for that day, OR record says true.
+  const isBoothAvailable = (booth: string) => {
+    if (!dayBoothAvail) return true;
+    return dayBoothAvail[booth] !== false;
+  };
+
 
   const backdropOptions: Record<string, string[]> = {
     Basic: ["Silver Sequins", "Rose Pink Sequins", "Black Sequins", "Off-White", "Red", "Brown", "Burgundy Wine"],

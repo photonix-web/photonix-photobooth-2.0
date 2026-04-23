@@ -91,7 +91,7 @@ const clientHtml = (b: BookingPayload) => `
       We will reach out via email if there are any questions or clarifications regarding your booking.
     </p>
     <p style="color:#444;font-size:13px;line-height:1.6;margin:0 0 8px">
-      For faster replies, you may message our Facebook Page <strong>@photonixbooth</strong> and provide your Booking Number.
+      For faster replies, you may message our Facebook Page <strong>@/photonixphotobooth</strong> and provide your booking number.
     </p>
     <p style="color:#888;font-size:12px;margin-top:24px">— Photonix Photo Booth Team</p>
   </div>

@@ -11,6 +11,10 @@ import boothBasicFinal from "@/assets/Basic-Final.png";
 import boothCurtainFinal from "@/assets/Curtain-Final.png";
 import boothClassicFinal from "@/assets/Classic-Final.png";
 import boothHighangleFinal from "@/assets/High-Angle-Final.png";
+import boothBasicHover from "@/assets/Basic-Hover.jpg";
+import boothCurtainHover from "@/assets/Curtain-Hover.jpg";
+import boothClassicHover from "@/assets/Classic-Hover.jpg";
+import boothHighangleHover from "@/assets/High-Angle-Hover.jpg";
 
 const booths = [
   {

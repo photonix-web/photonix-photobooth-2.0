@@ -5,7 +5,8 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
-import { CalendarDays, Upload, X, Image, Loader2 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CalendarDays, Upload, X, Image, Loader2, Plus, Minus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Select,
@@ -84,6 +85,9 @@ const BookUs = () => {
     themeMotif: "",
     backdropColor: "",
   });
+  const [extensionEnabled, setExtensionEnabled] = useState(false);
+  const [extensionHours, setExtensionHours] = useState(1);
+  const [unlimitedPrinting, setUnlimitedPrinting] = useState(false);
 
   // Fetch calendar availability for the next 6 months
   useEffect(() => {
@@ -166,6 +170,9 @@ const BookUs = () => {
       date: date.toISOString(),
       themeFileName: themeFile?.name || null,
       themePreview,
+      extensionEnabled,
+      extensionHours: extensionEnabled ? extensionHours : 0,
+      unlimitedPrinting,
     };
 
     navigate("/book/quotation", { state: bookingData });

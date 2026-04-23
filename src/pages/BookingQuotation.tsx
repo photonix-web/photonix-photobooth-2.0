@@ -29,7 +29,11 @@ const BookingQuotation = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const data = location.state as Record<string, string> | null;
+  const data = location.state as (Record<string, string> & {
+    extensionEnabled?: boolean;
+    extensionHours?: number;
+    unlimitedPrinting?: boolean;
+  }) | null;
 
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [detailsChecked, setDetailsChecked] = useState(false);
@@ -48,7 +52,18 @@ const BookingQuotation = () => {
   const price = priceMap[data.booth]?.[data.packageType] || "TBD";
   const basePrice = parsePriceString(price);
   const { fee: travelFee, zone: travelZone } = getTravelFee(data.city);
-  const totalPrice = basePrice + travelFee;
+  const extensionHours = data.extensionEnabled ? Math.max(1, Number(data.extensionHours) || 1) : 0;
+  const extensionTotal = extensionHours * 2500;
+  const unlimitedPrintingTotal = data.unlimitedPrinting ? 2000 : 0;
+  const addOnsTotal = extensionTotal + unlimitedPrintingTotal;
+  const totalPrice = basePrice + travelFee + addOnsTotal;
+  const extensionDisplay = extensionHours > 0
+    ? `Extension: ${extensionHours} hour${extensionHours > 1 ? "s" : ""} – ${formatPHP(extensionTotal)}`
+    : null;
+  const unlimitedDisplay = data.unlimitedPrinting ? `Unlimited Printing – ${formatPHP(2000)}` : null;
+  const addOnsSummary = (extensionDisplay || unlimitedDisplay)
+    ? [extensionDisplay, unlimitedDisplay].filter(Boolean).join(" • ")
+    : "None";
   const fullAddress = [data.streetAddress, data.barangay, data.city, data.province, data.postalCode].filter(Boolean).join(", ");
 
   const handleReceiptUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -103,8 +103,8 @@ const Contact = () => {
                   className="bg-card border-border"
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full font-heading tracking-widest">
-                SEND MESSAGE
+              <Button type="submit" size="lg" disabled={submitting} className="w-full font-heading tracking-widest">
+                {submitting ? "SENDING..." : "SEND MESSAGE"}
               </Button>
             </motion.form>
 

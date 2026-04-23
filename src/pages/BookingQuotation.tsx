@@ -169,7 +169,7 @@ const BookingQuotation = () => {
             themeFileName: themeFormattedName,
             themeFileUrl,
             receiptFileName: receiptFormattedName,
-            receiptFileUrl,
+            receiptFileUrl: receiptUrl,
           },
         });
       } catch (emailErr) {

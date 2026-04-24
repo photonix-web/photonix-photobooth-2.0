@@ -7,8 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 const Contact = () => {
+  useDocumentTitle("Contact | Photonix Photobooth");
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitting, setSubmitting] = useState(false);

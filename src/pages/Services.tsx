@@ -110,7 +110,9 @@ const booths = [
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  useDocumentTitle("Services | Photonix Photobooth");
+  return (
   <Layout>
     <section className="section-padding">
       <div className="container mx-auto">

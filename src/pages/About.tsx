@@ -5,8 +5,11 @@ import teamKin from "@/assets/kin-chibi-2.png";
 import teamDonny from "@/assets/edon-chibi.png";
 import teamBro from "@/assets/BRO-CHIBI.png";
 import groupChibi from "@/assets/group-chibi.png";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
-const About = () => (
+const About = () => {
+  useDocumentTitle("About Us | Photonix Photobooth");
+  return (
   <Layout>
     <section className="section-padding">
       <div className="container mx-auto max-w-5xl">

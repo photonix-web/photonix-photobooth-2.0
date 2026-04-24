@@ -221,7 +221,8 @@ const Services = () => {
         </div>
       </div>
     </section>
-  </Layout>
-);
+    </Layout>
+  );
+};
 
 export default Services;

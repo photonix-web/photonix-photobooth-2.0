@@ -8,6 +8,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CalendarDays, Upload, X, Image, Loader2, Plus, Minus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 import {
   Select,
   SelectContent,

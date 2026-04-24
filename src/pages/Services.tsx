@@ -175,8 +175,8 @@ const Services = () => (
                 </ul>
 
                 <div className="mt-5 pt-3 border-t border-border text-xs text-muted-foreground space-y-1">
-                  <p>Extension Rate per hour: ₱2,500</p>
-                  <p>Add Unli Reprint: ₱2,000</p>
+                  <p>Extension Rate per hour: {booth.name === "Classic" || booth.name === "High-Angle" ? "₱3,000" : "₱2,500"}</p>
+                  <p>Add Unli Reprint: ₱2,000 (per 2 hours)</p>
                   <p className="italic mt-2">*Prices subject to change without prior notice.</p>
                 </div>
 

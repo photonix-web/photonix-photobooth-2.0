@@ -15,6 +15,7 @@ import boothBasicHover from "@/assets/Basic-Hover.jpg";
 import boothCurtainHover from "@/assets/Curtain-Hover.jpg";
 import boothClassicHover from "@/assets/Classic-Hover.jpg";
 import boothHighangleHover from "@/assets/High-Angle-Hover.jpg";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 const booths = [
   {
@@ -109,7 +110,9 @@ const booths = [
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  useDocumentTitle("Services | Photonix Photobooth");
+  return (
   <Layout>
     <section className="section-padding">
       <div className="container mx-auto">
@@ -218,7 +221,8 @@ const Services = () => (
         </div>
       </div>
     </section>
-  </Layout>
-);
+    </Layout>
+  );
+};
 
 export default Services;

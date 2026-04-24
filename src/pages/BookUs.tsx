@@ -61,6 +61,7 @@ interface Availability {
 }
 
 const BookUs = () => {
+  useDocumentTitle("Book your event | Photonix Photobooth");
   const navigate = useNavigate();
   const [date, setDate] = useState<Date | undefined>();
   const [themeFile, setThemeFile] = useState<File | null>(null);

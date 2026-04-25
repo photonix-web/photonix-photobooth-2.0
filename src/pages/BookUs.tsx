@@ -90,6 +90,7 @@ const BookUs = () => {
   const [extensionEnabled, setExtensionEnabled] = useState(false);
   const [extensionHours, setExtensionHours] = useState(1);
   const [unlimitedPrinting, setUnlimitedPrinting] = useState(false);
+  const extensionRate = form.booth === "Classic" || form.booth === "High-Angle" ? 3000 : 2500;
 
   // Fetch calendar availability for the next 6 months
   useEffect(() => {

@@ -176,6 +176,7 @@ const BookUs = () => {
       extensionEnabled,
       extensionHours: extensionEnabled ? extensionHours : 0,
       unlimitedPrinting,
+      extensionRate,
     };
 
     navigate("/book/quotation", { state: bookingData });

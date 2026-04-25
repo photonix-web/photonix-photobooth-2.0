@@ -54,7 +54,8 @@ const BookingQuotation = () => {
   const basePrice = parsePriceString(price);
   const { fee: travelFee, zone: travelZone } = getTravelFee(data.city);
   const extensionHours = data.extensionEnabled ? Math.max(1, Number(data.extensionHours) || 1) : 0;
-  const extensionTotal = extensionHours * 2500;
+  const extensionRate = Number(data.extensionRate) || (data.booth === "Classic" || data.booth === "High-Angle" ? 3000 : 2500);
+  const extensionTotal = extensionHours * extensionRate;
   const unlimitedPrintingTotal = data.unlimitedPrinting ? 2000 : 0;
   const addOnsTotal = extensionTotal + unlimitedPrintingTotal;
   const totalPrice = basePrice + travelFee + addOnsTotal;

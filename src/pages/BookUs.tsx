@@ -434,7 +434,9 @@ const BookUs = () => {
                   />
                   <label htmlFor="extension" className="text-sm text-foreground cursor-pointer leading-relaxed flex-1">
                     <span className="font-medium">Extension</span>{" "}
-                    <span className="text-muted-foreground">(₱2,500 per hour)</span>
+                    <span className="text-muted-foreground">
+                      (₱{extensionRate.toLocaleString()} per hour)
+                    </span>
                   </label>
                 </div>
                 {extensionEnabled && (
@@ -465,7 +467,7 @@ const BookUs = () => {
                       </Button>
                     </div>
                     <span className="text-sm text-foreground">
-                      = ₱{(2500 * extensionHours).toLocaleString()}
+                      = ₱{(extensionRate * extensionHours).toLocaleString()}
                     </span>
                   </div>
                 )}
@@ -481,7 +483,7 @@ const BookUs = () => {
                 />
                 <label htmlFor="unlimited-printing" className="text-sm text-foreground cursor-pointer leading-relaxed flex-1">
                   <span className="font-medium">Unlimited Printing</span>{" "}
-                  <span className="text-muted-foreground">(₱2,000)</span>
+                  <span className="text-muted-foreground">(₱2,000 per 2 hours)</span>
                 </label>
               </div>
             </div>

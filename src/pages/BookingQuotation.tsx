@@ -308,7 +308,7 @@ const BookingQuotation = () => {
               </div>
               {extensionHours > 0 && (
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Extension — {extensionHours} hour{extensionHours > 1 ? "s" : ""} (₱2,500/hr)</span>
+                  <span className="text-muted-foreground">Extension — {extensionHours} hour{extensionHours > 1 ? "s" : ""} (₱{extensionRate.toLocaleString()}/hr)</span>
                   <span className="text-foreground">{formatPHP(extensionTotal)}</span>
                 </div>
               )}

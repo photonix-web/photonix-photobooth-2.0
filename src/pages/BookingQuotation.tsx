@@ -33,6 +33,7 @@ const BookingQuotation = () => {
     extensionEnabled?: boolean;
     extensionHours?: number;
     unlimitedPrinting?: boolean;
+    extensionRate?: number;
   }) | null;
 
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);

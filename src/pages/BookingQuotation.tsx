@@ -33,6 +33,7 @@ const BookingQuotation = () => {
     extensionEnabled?: boolean;
     extensionHours?: number;
     unlimitedPrinting?: boolean;
+    extensionRate?: number;
   }) | null;
 
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
@@ -53,7 +54,8 @@ const BookingQuotation = () => {
   const basePrice = parsePriceString(price);
   const { fee: travelFee, zone: travelZone } = getTravelFee(data.city);
   const extensionHours = data.extensionEnabled ? Math.max(1, Number(data.extensionHours) || 1) : 0;
-  const extensionTotal = extensionHours * 2500;
+  const extensionRate = Number(data.extensionRate) || (data.booth === "Classic" || data.booth === "High-Angle" ? 3000 : 2500);
+  const extensionTotal = extensionHours * extensionRate;
   const unlimitedPrintingTotal = data.unlimitedPrinting ? 2000 : 0;
   const addOnsTotal = extensionTotal + unlimitedPrintingTotal;
   const totalPrice = basePrice + travelFee + addOnsTotal;
@@ -306,7 +308,7 @@ const BookingQuotation = () => {
               </div>
               {extensionHours > 0 && (
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Extension — {extensionHours} hour{extensionHours > 1 ? "s" : ""} (₱2,500/hr)</span>
+                  <span className="text-muted-foreground">Extension — {extensionHours} hour{extensionHours > 1 ? "s" : ""} (₱{extensionRate.toLocaleString()}/hr)</span>
                   <span className="text-foreground">{formatPHP(extensionTotal)}</span>
                 </div>
               )}

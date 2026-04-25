@@ -90,6 +90,7 @@ const BookUs = () => {
   const [extensionEnabled, setExtensionEnabled] = useState(false);
   const [extensionHours, setExtensionHours] = useState(1);
   const [unlimitedPrinting, setUnlimitedPrinting] = useState(false);
+  const extensionRate = form.booth === "Classic" || form.booth === "High-Angle" ? 3000 : 2500;
 
   // Fetch calendar availability for the next 6 months
   useEffect(() => {
@@ -175,6 +176,7 @@ const BookUs = () => {
       extensionEnabled,
       extensionHours: extensionEnabled ? extensionHours : 0,
       unlimitedPrinting,
+      extensionRate,
     };
 
     navigate("/book/quotation", { state: bookingData });
@@ -434,7 +436,9 @@ const BookUs = () => {
                   />
                   <label htmlFor="extension" className="text-sm text-foreground cursor-pointer leading-relaxed flex-1">
                     <span className="font-medium">Extension</span>{" "}
-                    <span className="text-muted-foreground">(₱2,500 per hour)</span>
+                    <span className="text-muted-foreground">
+                      (₱{extensionRate.toLocaleString()} per hour)
+                    </span>
                   </label>
                 </div>
                 {extensionEnabled && (
@@ -465,7 +469,7 @@ const BookUs = () => {
                       </Button>
                     </div>
                     <span className="text-sm text-foreground">
-                      = ₱{(2500 * extensionHours).toLocaleString()}
+                      = ₱{(extensionRate * extensionHours).toLocaleString()}
                     </span>
                   </div>
                 )}
@@ -481,7 +485,7 @@ const BookUs = () => {
                 />
                 <label htmlFor="unlimited-printing" className="text-sm text-foreground cursor-pointer leading-relaxed flex-1">
                   <span className="font-medium">Unlimited Printing</span>{" "}
-                  <span className="text-muted-foreground">(₱2,000)</span>
+                  <span className="text-muted-foreground">(₱2,000 per 2 hours)</span>
                 </label>
               </div>
             </div>

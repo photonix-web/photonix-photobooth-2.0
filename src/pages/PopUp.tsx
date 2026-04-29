@@ -73,27 +73,27 @@ const PopUp = () => {
               className="relative rounded-2xl overflow-hidden shadow-lg"
             >
               <div
-                className="w-full bg-cover bg-center aspect-[1366/650] flex items-end"
+                className="w-full bg-cover bg-center aspect-[1366/650] flex items-center"
                 style={{ backgroundImage: `url(${section.bg})` }}
               >
-                <div className="w-full bg-gradient-to-t from-black/60 to-transparent p-6 md:p-10">
-                  <p className="font-body text-white font-bold text-sm md:text-base mb-3">
+                <div className="w-full p-6 md:p-16 max-w-2xl">
+                  <p className="font-body text-white font-bold text-base md:text-xl mb-5 drop-shadow-lg">
                     Grab your photos here:
                   </p>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-4">
                     {section.buttons.map((btn) => (
                       <a
                         key={btn.label}
                         href={btn.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 rounded-full bg-black text-white font-heading text-sm tracking-wider hover:bg-neutral-800 transition-colors"
+                        className="inline-flex items-center px-10 py-5 md:px-14 md:py-6 rounded-full bg-black text-white font-heading text-lg md:text-2xl tracking-wider hover:bg-neutral-800 transition-colors shadow-xl"
                       >
                         {btn.label}
                       </a>
                     ))}
                   </div>
-                  <p className="mt-3 font-body text-white/80 text-xs md:text-sm italic">
+                  <p className="mt-5 font-body text-white text-sm md:text-base italic drop-shadow-lg">
                     Hurry! limited time only
                   </p>
                 </div>

@@ -6,7 +6,7 @@ import logo from "@/assets/photonix-logo.png";
 const navItems = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
-  { label: "Pop-Up", path: "https://www.photonixphotobooth.com/pop-ups", external: true },
+  { label: "Pop-Up", path: "https://photonix.my.canva.site/pop-ups", external: true },
   { label: "Services", path: "/services" },
   { label: "Contact", path: "/contact" },
   { label: "Book Us", path: "/book" },

@@ -77,7 +77,7 @@ const PopUp = () => {
                 style={{ backgroundImage: `url(${section.bg})` }}
               >
                 <div className="w-full bg-gradient-to-t from-black/60 to-transparent p-6 md:p-10">
-                  <p className="font-body text-white/90 text-sm md:text-base mb-3">
+                  <p className="font-body text-white font-bold text-sm md:text-base mb-3">
                     Grab your photos here:
                   </p>
                   <div className="flex flex-wrap gap-3">
@@ -87,7 +87,7 @@ const PopUp = () => {
                         href={btn.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 rounded-full bg-white text-foreground font-heading text-sm tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors"
+                        className="inline-flex items-center px-6 py-3 rounded-full bg-black text-white font-heading text-sm tracking-wider hover:bg-neutral-800 transition-colors"
                       >
                         {btn.label}
                       </a>

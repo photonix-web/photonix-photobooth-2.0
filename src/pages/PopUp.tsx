@@ -73,8 +73,8 @@ const sections: PopUpSection[] = [
     title: "Valentines Day",
     bg: valentinesBg,
     buttons: [
-      { label: "Classic →", href: "#" },
-      { label: "High-Angle →", href: "#" },
+      { label: "Classic →", href: "https://fotoshare.co/e/DAeWyVHzPG9gbefwKU71t" },
+      { label: "High-Angle →", href: "https://fotoshare.co/e/aXu3hRKm7ZtYIhakOUSbC" },
     ],
   },
 ];

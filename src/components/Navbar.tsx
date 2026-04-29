@@ -27,25 +27,14 @@ const Navbar = () => {
         <ul className="hidden md:flex gap-8">
           {navItems.map((item) => (
             <li key={item.path}>
-              {item.external ? (
-                <a
-                  href={item.path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary text-foreground"
-                >
-                  {item.label.toUpperCase()}
-                </a>
-              ) : (
-                <Link
-                  to={item.path}
-                  className={`font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary ${
-                    location.pathname === item.path ? "text-primary" : "text-foreground"
-                  }`}
-                >
-                  {item.label.toUpperCase()}
-                </Link>
-              )}
+              <Link
+                to={item.path}
+                className={`font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary ${
+                  location.pathname === item.path ? "text-primary" : "text-foreground"
+                }`}
+              >
+                {item.label.toUpperCase()}
+              </Link>
             </li>
           ))}
         </ul>
@@ -62,27 +51,15 @@ const Navbar = () => {
           <ul className="flex flex-col items-center gap-4 py-6">
             {navItems.map((item) => (
               <li key={item.path}>
-                {item.external ? (
-                  <a
-                    href={item.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setOpen(false)}
-                    className="font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary text-foreground"
-                  >
-                    {item.label.toUpperCase()}
-                  </a>
-                ) : (
-                  <Link
-                    to={item.path}
-                    onClick={() => setOpen(false)}
-                    className={`font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary ${
-                      location.pathname === item.path ? "text-primary" : "text-foreground"
-                    }`}
-                  >
-                    {item.label.toUpperCase()}
-                  </Link>
-                )}
+                <Link
+                  to={item.path}
+                  onClick={() => setOpen(false)}
+                  className={`font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary ${
+                    location.pathname === item.path ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {item.label.toUpperCase()}
+                </Link>
               </li>
             ))}
           </ul>

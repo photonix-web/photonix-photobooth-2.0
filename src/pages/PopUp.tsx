@@ -63,8 +63,17 @@ const PopUp = () => {
           <h1 className="font-heading text-4xl md:text-5xl text-foreground tracking-wider">
             POP-UP EVENTS
           </h1>
-          <p className="mt-4 text-muted-foreground font-body">
-            Grab your photos from our recent pop-up events
+          <p className="mt-4 text-muted-foreground font-body max-w-2xl mx-auto">
+            Grab your photos from our recent pop-up events. Hurry! Limited time only. If you wish to delete your photo immediately, please message us on{" "}
+            <a
+              href="http://m.me/299017183285410"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline hover:text-primary transition-colors"
+            >
+              messenger
+            </a>
+            .
           </p>
         </div>
 

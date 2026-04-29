@@ -27,14 +27,25 @@ const Navbar = () => {
         <ul className="hidden md:flex gap-8">
           {navItems.map((item) => (
             <li key={item.path}>
-              <Link
-                to={item.path}
-                className={`font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary ${
-                  location.pathname === item.path ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {item.label.toUpperCase()}
-              </Link>
+              {item.external ? (
+                <a
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary text-foreground"
+                >
+                  {item.label.toUpperCase()}
+                </a>
+              ) : (
+                <Link
+                  to={item.path}
+                  className={`font-heading text-sm tracking-[0.2em] transition-colors hover:text-primary ${
+                    location.pathname === item.path ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {item.label.toUpperCase()}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

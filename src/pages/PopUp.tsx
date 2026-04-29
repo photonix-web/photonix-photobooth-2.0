@@ -14,6 +14,7 @@ interface PopUpSection {
   title: string;
   bg: string;
   buttons: PopUpButton[];
+  stackButtons?: boolean;
 }
 
 const sections: PopUpSection[] = [
@@ -28,6 +29,7 @@ const sections: PopUpSection[] = [
   {
     title: "Indigay 2026",
     bg: indigayBg,
+    stackButtons: true,
     buttons: [
       { label: "PART 1 →", href: "https://fotoshare.co/e/c-5pG2CBy1MAzm62qVyoM" },
       { label: "PART 2 →", href: "https://fotoshare.co/e/dcj26FxToC6OUAqaLuyUI" },
@@ -80,7 +82,7 @@ const PopUp = () => {
                   <p className="font-body text-white font-bold text-base md:text-xl mb-5 drop-shadow-lg">
                     Grab your photos here:
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className={`flex flex-wrap gap-4 ${section.stackButtons ? "flex-col items-start" : ""}`}>
                     {section.buttons.map((btn) => (
                       <a
                         key={btn.label}

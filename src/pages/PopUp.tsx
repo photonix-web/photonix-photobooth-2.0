@@ -79,7 +79,7 @@ const PopUp = () => {
                 style={{ backgroundImage: `url(${section.bg})` }}
               >
                 <div className="w-full p-6 md:p-16 max-w-2xl">
-                  <p className="font-body text-white font-bold text-base md:text-xl mb-5 drop-shadow-lg">
+                  <p className="font-body text-white font-semibold text-base md:text-xl mb-5 drop-shadow-lg">
                     Grab your photos here:
                   </p>
                   <div className={`flex flex-wrap gap-4 ${section.stackButtons ? "flex-col items-start" : ""}`}>

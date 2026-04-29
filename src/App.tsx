@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import BookUs from "./pages/BookUs";
+import PopUp from "./pages/PopUp";
 import BookingQuotation from "./pages/BookingQuotation";
 import BookingConfirmed from "./pages/BookingConfirmed";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/pop-ups" element={<PopUp />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/book" element={<BookUs />} />

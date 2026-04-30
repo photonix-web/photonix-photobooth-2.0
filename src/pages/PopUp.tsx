@@ -146,6 +146,9 @@ const PopUp = () => {
             </a>
             .
           </p>
+          <p className="mt-3 text-muted-foreground font-body max-w-2xl mx-auto">
+            invite us to your pop-up events! 👉🏼👈🏼
+          </p>
         </div>
 
         <div className="container mx-auto px-6 space-y-10 pb-16">

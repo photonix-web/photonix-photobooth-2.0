@@ -18,10 +18,10 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           className="font-heading text-5xl font-bold text-center mb-4"
         >
-          ABOUT <span className="text-primary">US</span>
+          ABOUT <span className="text-primary">PHOTONIX PHOTOBOOTH</span>
         </motion.h1>
         <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
-          Get to know the story behind Photonix
+          Your memories, our lens.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -33,16 +33,16 @@ const About = () => {
             <h2 className="font-heading text-3xl font-bold mb-6">OUR <span className="text-primary">STORY</span></h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                What started as a passion project has blossomed into a memorable experience for countless events! Em, with a heartfelt enthusiasm for photography and collecting cherished memories, joined forces with her brother to create a photobooth service that combines affordability with premium features.
+                Photonix Photobooth is a Tagum City-based event service founded in 2024, built on a passion for capturing meaningful moments. What started as a simple idea between siblings has grown into a trusted photobooth brand serving events across Davao del Norte.
               </p>
               <p>
-                Our mission is simple: to make your events unforgettable while providing high-quality service at rates that won't break the bank.
+                We specialize in modern, high-quality photobooth experiences—from weddings and birthdays to mall activations and corporate events. Known for our signature high-angle setup, premium prints, and sleek black-and-white aesthetic, we bring both style and substance to every event.
               </p>
               <p>
-                Based in Tagum City, we're proud to bring joy and creativity to events in our local area and beyond. We're DTI & BIR registered and operate with a business permit from the city, maintaining a standard of quality you can trust.
+                DTI and BIR registered, and fully permitted, Photonix ensures professional and reliable service you can count on.
               </p>
-              <p>
-                Whether it's a university event, a wedding, or a simple gathering, we're here to help you capture every special moment in style. Let's make memories together!
+              <p className="font-heading text-foreground">
+                ➕ your memories, our lens.
               </p>
             </div>
           </motion.div>
@@ -66,8 +66,8 @@ const About = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
-            { name: "Em", role: "Co-Founder & Creative Director", desc: "Passionate about photography and creating cherished memories through every booth experience.", img: teamEm },
-            { name: "Kin", role: "Co-Founder & Operations Lead", desc: "Ensuring every event runs smoothly, from logistics to setup and teardown.", img: teamKin },
+            { name: "Em", role: "Creative Lead", desc: "Passionate about photography and creating cherished memories through every booth experience.", img: teamEm },
+            { name: "Kin", role: "Operations Lead", desc: "Ensuring every event runs smoothly, from logistics to setup and teardown.", img: teamKin },
           ].map((member, i) => (
             <motion.div
               key={i}

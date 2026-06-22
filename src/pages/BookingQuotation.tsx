@@ -98,12 +98,13 @@ const BookingQuotation = () => {
     return `${sanitized}-${dateStr}-${type}.${ext}`;
   };
 
+  // Bucket is private. Upload returns the storage path; the email edge function
+  // (service role) downloads via path and generates signed links as needed.
   const uploadFile = async (file: File, folder: string, formattedName: string) => {
     const filePath = `${folder}/${formattedName}`;
     const { error } = await supabase.storage.from("booking-files").upload(filePath, file);
     if (error) throw error;
-    const { data: urlData } = supabase.storage.from("booking-files").getPublicUrl(filePath);
-    return urlData.publicUrl;
+    return filePath;
   };
 
   const handleSubmit = async () => {

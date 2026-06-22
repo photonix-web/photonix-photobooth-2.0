@@ -1,10 +1,52 @@
 import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.95.0";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
 const FROM_ADDRESS =
   Deno.env.get("BOOKING_EMAIL_FROM") ||
   "Photonix Photo Booth <bookings@photonixphotobooth.com>";
 const ADMIN_EMAIL = "photonix.biz@gmail.com";
+const BOOKING_BUCKET = "booking-files";
+const SIGNED_URL_TTL_SECONDS = 60 * 60 * 24 * 7; // 7 days
+
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const adminStorage = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+  auth: { persistSession: false },
+});
+
+// The frontend sends a storage path (e.g. "receipts/foo.jpg") since the
+// booking-files bucket is private. Legacy rows may still carry a full public URL —
+// we extract the object path from those so signed URLs / downloads still work.
+function extractStoragePath(value?: string | null): string | null {
+  if (!value) return null;
+  const m = value.match(/\/booking-files\/(.+)$/);
+  if (m) return decodeURIComponent(m[1]);
+  if (/^https?:\/\//i.test(value)) return null;
+  return value.replace(/^\/+/, "");
+}
+
+async function getSignedUrl(path: string): Promise<string | null> {
+  const { data, error } = await adminStorage.storage
+    .from(BOOKING_BUCKET)
+    .createSignedUrl(path, SIGNED_URL_TTL_SECONDS);
+  if (error || !data?.signedUrl) {
+    console.error("createSignedUrl failed:", path, error);
+    return null;
+  }
+  return data.signedUrl;
+}
+
+async function downloadFile(path: string): Promise<Uint8Array | null> {
+  const { data, error } = await adminStorage.storage
+    .from(BOOKING_BUCKET)
+    .download(path);
+  if (error || !data) {
+    console.error("storage.download failed:", path, error);
+    return null;
+  }
+  return new Uint8Array(await data.arrayBuffer());
+}
 
 interface BookingPayload {
   bookingNumber: string;
@@ -99,7 +141,9 @@ const clientHtml = (b: BookingPayload) => `
   </div>
 </body></html>`;
 
-const adminHtml = (b: BookingPayload) => `
+type AdminLinks = { themeUrl?: string | null; receiptUrl?: string | null };
+
+const adminHtml = (b: BookingPayload, links: AdminLinks) => `
 <!doctype html><html><body style="font-family:Arial,sans-serif;background:#ffffff;color:#111;margin:0;padding:24px">
   <div style="max-width:680px;margin:0 auto">
     <h1 style="color:#111;font-size:20px;letter-spacing:2px;margin:0 0 12px">NEW BOOKING SUBMISSION</h1>
@@ -108,32 +152,26 @@ const adminHtml = (b: BookingPayload) => `
     </p>
     ${buildDetailsTable(b)}
     ${
-      b.themeFileUrl || b.receiptFileUrl
-        ? `<h3 style="font-size:14px;letter-spacing:1px;margin:20px 0 8px">FILE LINKS (also attached)</h3>
+      links.themeUrl || links.receiptUrl
+        ? `<h3 style="font-size:14px;letter-spacing:1px;margin:20px 0 8px">FILE LINKS (also attached, signed link valid 7 days)</h3>
           <ul style="font-size:13px;color:#444;line-height:1.7">
-            ${b.themeFileUrl ? `<li>Theme Reference: <a href="${escapeHtml(b.themeFileUrl)}">${escapeHtml(b.themeFileName || "theme")}</a></li>` : ""}
-            ${b.receiptFileUrl ? `<li>Proof of Payment: <a href="${escapeHtml(b.receiptFileUrl)}">${escapeHtml(b.receiptFileName || "receipt")}</a></li>` : ""}
+            ${links.themeUrl ? `<li>Theme Reference: <a href="${escapeHtml(links.themeUrl)}">${escapeHtml(b.themeFileName || "theme")}</a></li>` : ""}
+            ${links.receiptUrl ? `<li>Proof of Payment: <a href="${escapeHtml(links.receiptUrl)}">${escapeHtml(b.receiptFileName || "receipt")}</a></li>` : ""}
           </ul>`
         : ""
     }
   </div>
 </body></html>`;
 
-async function fetchAttachment(url: string, filename: string) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const buf = new Uint8Array(await res.arrayBuffer());
-    let binary = "";
-    const chunkSize = 0x8000;
-    for (let i = 0; i < buf.length; i += chunkSize) {
-      binary += String.fromCharCode(...buf.subarray(i, i + chunkSize));
-    }
-    return { filename, content: btoa(binary) };
-  } catch (e) {
-    console.error("Attachment fetch failed:", url, e);
-    return null;
+async function buildAttachmentFromPath(path: string, filename: string) {
+  const buf = await downloadFile(path);
+  if (!buf) return null;
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let i = 0; i < buf.length; i += chunkSize) {
+    binary += String.fromCharCode(...buf.subarray(i, i + chunkSize));
   }
+  return { filename, content: btoa(binary) };
 }
 
 async function sendViaResend(payload: Record<string, unknown>) {
@@ -179,15 +217,29 @@ Deno.serve(async (req) => {
       html: clientHtml(b),
     });
 
-    // 2) Internal admin email with attachments
+    // 2) Internal admin email: download files via service role and sign URLs (bucket is private)
+    const themePath = extractStoragePath(b.themeFileUrl);
+    const receiptPath = extractStoragePath(b.receiptFileUrl);
+
     const attachments: Array<{ filename: string; content: string }> = [];
-    if (b.themeFileUrl && b.themeFileName) {
-      const a = await fetchAttachment(b.themeFileUrl, b.themeFileName);
+    let themeSignedUrl: string | null = null;
+    let receiptSignedUrl: string | null = null;
+
+    if (themePath && b.themeFileName) {
+      const [a, signed] = await Promise.all([
+        buildAttachmentFromPath(themePath, b.themeFileName),
+        getSignedUrl(themePath),
+      ]);
       if (a) attachments.push(a);
+      themeSignedUrl = signed;
     }
-    if (b.receiptFileUrl && b.receiptFileName) {
-      const a = await fetchAttachment(b.receiptFileUrl, b.receiptFileName);
+    if (receiptPath && b.receiptFileName) {
+      const [a, signed] = await Promise.all([
+        buildAttachmentFromPath(receiptPath, b.receiptFileName),
+        getSignedUrl(receiptPath),
+      ]);
       if (a) attachments.push(a);
+      receiptSignedUrl = signed;
     }
 
     const adminSubject = `NEW BOOKING SUBMISSION – ${b.bookingNumber} – ${b.clientName}`;
@@ -195,7 +247,7 @@ Deno.serve(async (req) => {
       from: FROM_ADDRESS,
       to: [ADMIN_EMAIL],
       subject: adminSubject,
-      html: adminHtml(b),
+      html: adminHtml(b, { themeUrl: themeSignedUrl, receiptUrl: receiptSignedUrl }),
     };
     if (attachments.length) adminPayload.attachments = attachments;
     const adminResult = await sendViaResend(adminPayload);

@@ -50,6 +50,8 @@ const BookingQuotation = () => {
   if (!data) return null;
 
   const eventDate = new Date(data.date);
+  // Local YYYY-MM-DD (avoids UTC shift that turned e.g. June 30 PHT into June 29 UTC)
+  const eventDateYMD = `${eventDate.getFullYear()}-${(eventDate.getMonth() + 1).toString().padStart(2, "0")}-${eventDate.getDate().toString().padStart(2, "0")}`;
   const price = priceMap[data.booth]?.[data.packageType] || "TBD";
   const basePrice = parsePriceString(price);
   const { fee: travelFee, zone: travelZone } = getTravelFee(data.city);

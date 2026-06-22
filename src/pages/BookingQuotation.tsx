@@ -139,7 +139,7 @@ const BookingQuotation = () => {
         booth_package: data.booth,
         package_type: data.packageType,
         event_name: data.eventName,
-        event_date: eventDate.toISOString().split("T")[0],
+        event_date: eventDateYMD,
         start_time: data.startTime,
         venue: data.venue,
         pax_guest: data.paxGuest || null,

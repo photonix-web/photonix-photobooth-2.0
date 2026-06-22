@@ -1,10 +1,52 @@
 import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.95.0";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
 const FROM_ADDRESS =
   Deno.env.get("BOOKING_EMAIL_FROM") ||
   "Photonix Photo Booth <bookings@photonixphotobooth.com>";
 const ADMIN_EMAIL = "photonix.biz@gmail.com";
+const BOOKING_BUCKET = "booking-files";
+const SIGNED_URL_TTL_SECONDS = 60 * 60 * 24 * 7; // 7 days
+
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const adminStorage = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+  auth: { persistSession: false },
+});
+
+// The frontend sends a storage path (e.g. "receipts/foo.jpg") since the
+// booking-files bucket is private. Legacy rows may still carry a full public URL —
+// we extract the object path from those so signed URLs / downloads still work.
+function extractStoragePath(value?: string | null): string | null {
+  if (!value) return null;
+  const m = value.match(/\/booking-files\/(.+)$/);
+  if (m) return decodeURIComponent(m[1]);
+  if (/^https?:\/\//i.test(value)) return null;
+  return value.replace(/^\/+/, "");
+}
+
+async function getSignedUrl(path: string): Promise<string | null> {
+  const { data, error } = await adminStorage.storage
+    .from(BOOKING_BUCKET)
+    .createSignedUrl(path, SIGNED_URL_TTL_SECONDS);
+  if (error || !data?.signedUrl) {
+    console.error("createSignedUrl failed:", path, error);
+    return null;
+  }
+  return data.signedUrl;
+}
+
+async function downloadFile(path: string): Promise<Uint8Array | null> {
+  const { data, error } = await adminStorage.storage
+    .from(BOOKING_BUCKET)
+    .download(path);
+  if (error || !data) {
+    console.error("storage.download failed:", path, error);
+    return null;
+  }
+  return new Uint8Array(await data.arrayBuffer());
+}
 
 interface BookingPayload {
   bookingNumber: string;

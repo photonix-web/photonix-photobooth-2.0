@@ -217,15 +217,29 @@ Deno.serve(async (req) => {
       html: clientHtml(b),
     });
 
-    // 2) Internal admin email with attachments
+    // 2) Internal admin email: download files via service role and sign URLs (bucket is private)
+    const themePath = extractStoragePath(b.themeFileUrl);
+    const receiptPath = extractStoragePath(b.receiptFileUrl);
+
     const attachments: Array<{ filename: string; content: string }> = [];
-    if (b.themeFileUrl && b.themeFileName) {
-      const a = await fetchAttachment(b.themeFileUrl, b.themeFileName);
+    let themeSignedUrl: string | null = null;
+    let receiptSignedUrl: string | null = null;
+
+    if (themePath && b.themeFileName) {
+      const [a, signed] = await Promise.all([
+        buildAttachmentFromPath(themePath, b.themeFileName),
+        getSignedUrl(themePath),
+      ]);
       if (a) attachments.push(a);
+      themeSignedUrl = signed;
     }
-    if (b.receiptFileUrl && b.receiptFileName) {
-      const a = await fetchAttachment(b.receiptFileUrl, b.receiptFileName);
+    if (receiptPath && b.receiptFileName) {
+      const [a, signed] = await Promise.all([
+        buildAttachmentFromPath(receiptPath, b.receiptFileName),
+        getSignedUrl(receiptPath),
+      ]);
       if (a) attachments.push(a);
+      receiptSignedUrl = signed;
     }
 
     const adminSubject = `NEW BOOKING SUBMISSION – ${b.bookingNumber} – ${b.clientName}`;
@@ -233,7 +247,7 @@ Deno.serve(async (req) => {
       from: FROM_ADDRESS,
       to: [ADMIN_EMAIL],
       subject: adminSubject,
-      html: adminHtml(b),
+      html: adminHtml(b, { themeUrl: themeSignedUrl, receiptUrl: receiptSignedUrl }),
     };
     if (attachments.length) adminPayload.attachments = attachments;
     const adminResult = await sendViaResend(adminPayload);

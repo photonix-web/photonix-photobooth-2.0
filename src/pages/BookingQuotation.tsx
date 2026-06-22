@@ -50,6 +50,8 @@ const BookingQuotation = () => {
   if (!data) return null;
 
   const eventDate = new Date(data.date);
+  // Local YYYY-MM-DD (avoids UTC shift that turned e.g. June 30 PHT into June 29 UTC)
+  const eventDateYMD = `${eventDate.getFullYear()}-${(eventDate.getMonth() + 1).toString().padStart(2, "0")}-${eventDate.getDate().toString().padStart(2, "0")}`;
   const price = priceMap[data.booth]?.[data.packageType] || "TBD";
   const basePrice = parsePriceString(price);
   const { fee: travelFee, zone: travelZone } = getTravelFee(data.city);
@@ -137,7 +139,7 @@ const BookingQuotation = () => {
         booth_package: data.booth,
         package_type: data.packageType,
         event_name: data.eventName,
-        event_date: eventDate.toISOString().split("T")[0],
+        event_date: eventDateYMD,
         start_time: data.startTime,
         venue: data.venue,
         pax_guest: data.paxGuest || null,
@@ -209,7 +211,7 @@ const BookingQuotation = () => {
             booth: data.booth,
             packageType: data.packageType,
             eventName: data.eventName,
-            eventDate: eventDate.toISOString().split("T")[0],
+            eventDate: eventDateYMD,
             startTime: data.startTime,
             durationHours: 4,
             fullAddress,

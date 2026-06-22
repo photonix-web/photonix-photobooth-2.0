@@ -141,7 +141,9 @@ const clientHtml = (b: BookingPayload) => `
   </div>
 </body></html>`;
 
-const adminHtml = (b: BookingPayload) => `
+type AdminLinks = { themeUrl?: string | null; receiptUrl?: string | null };
+
+const adminHtml = (b: BookingPayload, links: AdminLinks) => `
 <!doctype html><html><body style="font-family:Arial,sans-serif;background:#ffffff;color:#111;margin:0;padding:24px">
   <div style="max-width:680px;margin:0 auto">
     <h1 style="color:#111;font-size:20px;letter-spacing:2px;margin:0 0 12px">NEW BOOKING SUBMISSION</h1>
@@ -150,32 +152,26 @@ const adminHtml = (b: BookingPayload) => `
     </p>
     ${buildDetailsTable(b)}
     ${
-      b.themeFileUrl || b.receiptFileUrl
-        ? `<h3 style="font-size:14px;letter-spacing:1px;margin:20px 0 8px">FILE LINKS (also attached)</h3>
+      links.themeUrl || links.receiptUrl
+        ? `<h3 style="font-size:14px;letter-spacing:1px;margin:20px 0 8px">FILE LINKS (also attached, signed link valid 7 days)</h3>
           <ul style="font-size:13px;color:#444;line-height:1.7">
-            ${b.themeFileUrl ? `<li>Theme Reference: <a href="${escapeHtml(b.themeFileUrl)}">${escapeHtml(b.themeFileName || "theme")}</a></li>` : ""}
-            ${b.receiptFileUrl ? `<li>Proof of Payment: <a href="${escapeHtml(b.receiptFileUrl)}">${escapeHtml(b.receiptFileName || "receipt")}</a></li>` : ""}
+            ${links.themeUrl ? `<li>Theme Reference: <a href="${escapeHtml(links.themeUrl)}">${escapeHtml(b.themeFileName || "theme")}</a></li>` : ""}
+            ${links.receiptUrl ? `<li>Proof of Payment: <a href="${escapeHtml(links.receiptUrl)}">${escapeHtml(b.receiptFileName || "receipt")}</a></li>` : ""}
           </ul>`
         : ""
     }
   </div>
 </body></html>`;
 
-async function fetchAttachment(url: string, filename: string) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const buf = new Uint8Array(await res.arrayBuffer());
-    let binary = "";
-    const chunkSize = 0x8000;
-    for (let i = 0; i < buf.length; i += chunkSize) {
-      binary += String.fromCharCode(...buf.subarray(i, i + chunkSize));
-    }
-    return { filename, content: btoa(binary) };
-  } catch (e) {
-    console.error("Attachment fetch failed:", url, e);
-    return null;
+async function buildAttachmentFromPath(path: string, filename: string) {
+  const buf = await downloadFile(path);
+  if (!buf) return null;
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let i = 0; i < buf.length; i += chunkSize) {
+    binary += String.fromCharCode(...buf.subarray(i, i + chunkSize));
   }
+  return { filename, content: btoa(binary) };
 }
 
 async function sendViaResend(payload: Record<string, unknown>) {

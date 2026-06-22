@@ -211,7 +211,7 @@ const BookingQuotation = () => {
             booth: data.booth,
             packageType: data.packageType,
             eventName: data.eventName,
-            eventDate: eventDate.toISOString().split("T")[0],
+            eventDate: eventDateYMD,
             startTime: data.startTime,
             durationHours: 4,
             fullAddress,

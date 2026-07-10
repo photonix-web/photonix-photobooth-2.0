@@ -105,7 +105,9 @@ const formatDateKey = (date: Date) => {
 const DateLinkButton = ({ btn }: { btn: PopUpButton }) => {
   const dateLinks = btn.dateLinks!;
   const enabledDates = new Set(Object.keys(dateLinks));
-  const defaultMonth = new Date(2026, 2, 1); // March 2026
+  const firstKey = Object.keys(dateLinks).sort()[0];
+  const [fy, fm] = firstKey ? firstKey.split("-").map(Number) : [2026, 3];
+  const defaultMonth = new Date(fy, (fm ?? 1) - 1, 1);
 
   const handleSelect = (date: Date | undefined) => {
     if (!date) return;

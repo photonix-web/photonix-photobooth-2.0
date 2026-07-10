@@ -43,13 +43,29 @@ const panaboHighAngleLinks: Record<string, string> = {
   "2026-03-23": "https://fotoshare.co/e/2kfFATGSZ6mRoz-n7u0Hm",
 };
 
+const mothersDayClassicLinks: Record<string, string> = {
+  "2026-05-06": "https://fotoshare.co/e/CDqvXgKr-i4OTGEocXp4A",
+  "2026-05-07": "https://fotoshare.co/e/3FdWwc9SJMby_dbU-q0hK",
+  "2026-05-08": "https://fotoshare.co/e/Iy6V2QEzTgrXsikVIVboJ",
+  "2026-05-09": "https://fotoshare.co/e/bbUGzTzUQoSc2UAyCm7fn",
+  "2026-05-10": "https://fotoshare.co/e/VTRSe3pKF4TGJe4XshPBt",
+};
+
+const mothersDayHighAngleLinks: Record<string, string> = {
+  "2026-05-06": "https://fotoshare.co/e/P4RCXfdfyLUsiVgsrGmHN",
+  "2026-05-07": "https://fotoshare.co/e/n5ciSznFs-ESbwPODPTT6",
+  "2026-05-08": "https://fotoshare.co/e/aBtUeiizRIaa1kvV3yWGh",
+  "2026-05-09": "https://fotoshare.co/e/NXNE4afxS9n71D7u4ELKV",
+  "2026-05-10": "https://fotoshare.co/e/VTRSe3pKF4TGJe4XshPBt",
+};
+
 const sections: PopUpSection[] = [
   {
     title: "Mother's Day",
     bg: mothersDayBg,
     buttons: [
-      { label: "Classic →", href: "#" },
-      { label: "High-Angle →", href: "#" },
+      { label: "Classic →", dateLinks: mothersDayClassicLinks },
+      { label: "High-Angle →", dateLinks: mothersDayHighAngleLinks },
     ],
   },
   {

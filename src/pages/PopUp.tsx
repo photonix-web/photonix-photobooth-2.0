@@ -77,7 +77,6 @@ const sections: PopUpSection[] = [
     buttons: [
       { label: "Classic →", dateLinks: santoTomasClassicLinks },
     ],
-    stackButtons: true,
   },
   {
     title: "MSME 2026",

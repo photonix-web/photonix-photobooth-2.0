@@ -73,14 +73,14 @@ const santoTomasClassicLinks: Record<string, string> = {
 const sections: PopUpSection[] = [
   {
     title: "67th Santo Tomas Pop-up",
-    bg: santoTomasBg.url,
+    bg: santoTomasBg,
     buttons: [
       { label: "Classic →", dateLinks: santoTomasClassicLinks },
     ],
   },
   {
     title: "MSME 2026",
-    bg: msmeBg.url,
+    bg: msmeBg,
     buttons: [
       { label: "High-Angle →", href: "https://fotoshare.co/e/Sd5qjh9y4mdtxZiW3zR4I" },
     ],

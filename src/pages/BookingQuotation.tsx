@@ -101,7 +101,9 @@ const BookingQuotation = () => {
   // Bucket is private. Upload returns the storage path; the email edge function
   // (service role) downloads via path and generates signed links as needed.
   const uploadFile = async (file: File, folder: string, formattedName: string) => {
-    const filePath = `${folder}/${formattedName}`;
+    // Prefix with a random UUID so uploaders cannot overwrite or squat on
+    // another submission's file name. RLS enforces this shape server-side.
+    const filePath = `${folder}/${crypto.randomUUID()}-${formattedName}`;
     const { error } = await supabase.storage.from("booking-files").upload(filePath, file);
     if (error) throw error;
     return filePath;

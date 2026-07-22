@@ -76,8 +76,8 @@ const sections: PopUpSection[] = [
     bg: santoTomasBg.url,
     buttons: [
       { label: "Classic →", dateLinks: santoTomasClassicLinks },
-      { label: "High-Angle →", href: "https://fotoshare.co/e/Sd5qjh9y4mdtxZiW3zR4I" },
     ],
+    stackButtons: true,
   },
   {
     title: "MSME 2026",

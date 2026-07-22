@@ -7,8 +7,8 @@ import mothersDayBg from "@/assets/popup-mothers-day.jpg";
 import indigayBg from "@/assets/popup-indigay.jpg";
 import panaboBg from "@/assets/popup-panabo.jpg";
 import valentinesBg from "@/assets/popup-valentines.jpg";
-import msmeBg from "@/assets/msme-2026.png.asset.json";
-import santoTomasBg from "@/assets/santo-tomas-2026.png.asset.json";
+import msmeBg from "@/assets/png-msme-26.png";
+import santoTomasBg from "@/assets/png-67stt-26.png";
 
 interface PopUpButton {
   label: string;

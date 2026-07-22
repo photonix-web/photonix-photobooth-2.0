@@ -8,6 +8,7 @@ import indigayBg from "@/assets/popup-indigay.jpg";
 import panaboBg from "@/assets/popup-panabo.jpg";
 import valentinesBg from "@/assets/popup-valentines.jpg";
 import msmeBg from "@/assets/msme-2026.jpg.asset.json";
+import santoTomasBg from "@/assets/santo-tomas-2026.jpg.asset.json";
 
 interface PopUpButton {
   label: string;

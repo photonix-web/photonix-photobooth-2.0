@@ -61,7 +61,24 @@ const mothersDayHighAngleLinks: Record<string, string> = {
   "2026-05-10": "https://fotoshare.co/e/VTRSe3pKF4TGJe4XshPBt",
 };
 
+const santoTomasClassicLinks: Record<string, string> = {
+  "2026-07-17": "https://fotoshare.co/e/hTzY7MPqXyboOKmOnfyk7",
+  "2026-07-18": "https://fotoshare.co/e/PRpgqSiwcIXEA1YkjJG7N",
+  "2026-07-19": "https://fotoshare.co/e/DkfFkSvUv_5J76VrtllLQ",
+  "2026-07-20": "https://fotoshare.co/e/pud_Q9mYNiE6FA-g264_x",
+  "2026-07-21": "https://fotoshare.co/e/mH3FHiJ5jV_DDgU7eHkvc",
+  "2026-07-22": "https://fotoshare.co/e/mMXBuxpgKd45u76YTcgUy",
+};
+
 const sections: PopUpSection[] = [
+  {
+    title: "67th Santo Tomas Pop-up",
+    bg: santoTomasBg.url,
+    buttons: [
+      { label: "Classic →", dateLinks: santoTomasClassicLinks },
+      { label: "High-Angle →", href: "https://fotoshare.co/e/Sd5qjh9y4mdtxZiW3zR4I" },
+    ],
+  },
   {
     title: "MSME 2026",
     bg: msmeBg.url,

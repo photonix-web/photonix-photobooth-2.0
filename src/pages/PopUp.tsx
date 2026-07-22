@@ -7,6 +7,7 @@ import mothersDayBg from "@/assets/popup-mothers-day.jpg";
 import indigayBg from "@/assets/popup-indigay.jpg";
 import panaboBg from "@/assets/popup-panabo.jpg";
 import valentinesBg from "@/assets/popup-valentines.jpg";
+import msmeBg from "@/assets/msme-2026.jpg.asset.json";
 
 interface PopUpButton {
   label: string;
@@ -60,6 +61,13 @@ const mothersDayHighAngleLinks: Record<string, string> = {
 };
 
 const sections: PopUpSection[] = [
+  {
+    title: "MSME 2026",
+    bg: msmeBg.url,
+    buttons: [
+      { label: "High-Angle →", href: "https://fotoshare.co/e/Sd5qjh9y4mdtxZiW3zR4I" },
+    ],
+  },
   {
     title: "Mother's Day",
     bg: mothersDayBg,

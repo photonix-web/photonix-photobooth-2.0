@@ -8,6 +8,7 @@ import indigayBg from "@/assets/popup-indigay.jpg";
 import panaboBg from "@/assets/popup-panabo.jpg";
 import valentinesBg from "@/assets/popup-valentines.jpg";
 import msmeBg from "@/assets/msme-2026.jpg.asset.json";
+import santoTomasBg from "@/assets/santo-tomas-2026.jpg.asset.json";
 
 interface PopUpButton {
   label: string;
@@ -60,7 +61,23 @@ const mothersDayHighAngleLinks: Record<string, string> = {
   "2026-05-10": "https://fotoshare.co/e/VTRSe3pKF4TGJe4XshPBt",
 };
 
+const santoTomasClassicLinks: Record<string, string> = {
+  "2026-07-17": "https://fotoshare.co/e/hTzY7MPqXyboOKmOnfyk7",
+  "2026-07-18": "https://fotoshare.co/e/PRpgqSiwcIXEA1YkjJG7N",
+  "2026-07-19": "https://fotoshare.co/e/DkfFkSvUv_5J76VrtllLQ",
+  "2026-07-20": "https://fotoshare.co/e/pud_Q9mYNiE6FA-g264_x",
+  "2026-07-21": "https://fotoshare.co/e/mH3FHiJ5jV_DDgU7eHkvc",
+  "2026-07-22": "https://fotoshare.co/e/mMXBuxpgKd45u76YTcgUy",
+};
+
 const sections: PopUpSection[] = [
+  {
+    title: "67th Santo Tomas Pop-up",
+    bg: santoTomasBg.url,
+    buttons: [
+      { label: "Classic →", dateLinks: santoTomasClassicLinks },
+    ],
+  },
   {
     title: "MSME 2026",
     bg: msmeBg.url,

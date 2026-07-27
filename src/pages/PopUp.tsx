@@ -84,6 +84,7 @@ const sections: PopUpSection[] = [
     bg: santoTomasBg,
     buttons: [
       { label: "Classic →", dateLinks: santoTomasClassicLinks },
+      { label: "High-Angle →", dateLinks: santoTomasHighAngleLinks },
     ],
   },
   {

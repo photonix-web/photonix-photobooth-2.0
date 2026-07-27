@@ -62,6 +62,12 @@ const mothersDayHighAngleLinks: Record<string, string> = {
 };
 
 const santoTomasClassicLinks: Record<string, string> = {
+  "2026-07-17": "https://fotoshare.co/e/hTzY7MPqXyboOKmOnfyk7",
+  "2026-07-18": "https://fotoshare.co/e/PRpgqSiwcIXEA1YkjJG7N",
+  "2026-07-19": "https://fotoshare.co/e/DkfFkSvUv_5J76VrtllLQ",
+  "2026-07-20": "https://fotoshare.co/e/pud_Q9mYNiE6FA-g264_x",
+  "2026-07-21": "https://fotoshare.co/e/mH3FHiJ5jV_DDgU7eHkvc",
+  "2026-07-22": "https://fotoshare.co/e/mMXBuxpgKd45u76YTcgUy",
   "2026-07-23": "https://fotoshare.co/e/0ZZ9j_Ao8M0gWrpRHd2ac",
   "2026-07-24": "https://fotoshare.co/e/HUsJ5XfFjuQsdWUlKmhgB",
   "2026-07-25": "https://fotoshare.co/e/fz8KOThr2dlB4FQvJSAGk",

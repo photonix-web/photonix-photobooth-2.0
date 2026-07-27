@@ -62,12 +62,20 @@ const mothersDayHighAngleLinks: Record<string, string> = {
 };
 
 const santoTomasClassicLinks: Record<string, string> = {
-  "2026-07-17": "https://fotoshare.co/e/hTzY7MPqXyboOKmOnfyk7",
-  "2026-07-18": "https://fotoshare.co/e/PRpgqSiwcIXEA1YkjJG7N",
-  "2026-07-19": "https://fotoshare.co/e/DkfFkSvUv_5J76VrtllLQ",
-  "2026-07-20": "https://fotoshare.co/e/pud_Q9mYNiE6FA-g264_x",
-  "2026-07-21": "https://fotoshare.co/e/mH3FHiJ5jV_DDgU7eHkvc",
-  "2026-07-22": "https://fotoshare.co/e/mMXBuxpgKd45u76YTcgUy",
+  "2026-07-23": "https://fotoshare.co/e/0ZZ9j_Ao8M0gWrpRHd2ac",
+  "2026-07-24": "https://fotoshare.co/e/HUsJ5XfFjuQsdWUlKmhgB",
+  "2026-07-25": "https://fotoshare.co/e/fz8KOThr2dlB4FQvJSAGk",
+  "2026-07-26": "https://fotoshare.co/e/CSEpm3XlhJ-yHnE2FRIsK",
+};
+
+const santoTomasHighAngleLinks: Record<string, string> = {
+  "2026-07-20": "https://fotoshare.co/e/oHR6aGzaDbaJKZE18Ms30",
+  "2026-07-21": "https://fotoshare.co/e/lTNMhX04-KDp-y2RUwacQ",
+  "2026-07-22": "https://fotoshare.co/e/KwcdfhqIMhSGoOQgiIBzm",
+  "2026-07-23": "https://fotoshare.co/e/Uq6pURZC5usB5izs4-uon",
+  "2026-07-24": "https://fotoshare.co/e/SVwcN4bVTGqt45ak0V5wU",
+  "2026-07-25": "https://fotoshare.co/e/gZ99zVnv9U3GbAoJrQxuT",
+  "2026-07-26": "https://fotoshare.co/e/xDWowegmu_b3xnckwFwoF",
 };
 
 const sections: PopUpSection[] = [
@@ -76,6 +84,7 @@ const sections: PopUpSection[] = [
     bg: santoTomasBg,
     buttons: [
       { label: "Classic →", dateLinks: santoTomasClassicLinks },
+      { label: "High-Angle →", dateLinks: santoTomasHighAngleLinks },
     ],
   },
   {

@@ -72,6 +72,20 @@ const santoTomasClassicLinks: Record<string, string> = {
   "2026-07-24": "https://fotoshare.co/e/HUsJ5XfFjuQsdWUlKmhgB",
   "2026-07-25": "https://fotoshare.co/e/fz8KOThr2dlB4FQvJSAGk",
   "2026-07-26": "https://fotoshare.co/e/CSEpm3XlhJ-yHnE2FRIsK",
+  "2026-07-27": "https://fotoshare.co/e/fQ_0FhL-R5uhKt_aKGxHT",
+  "2026-07-28": "https://fotoshare.co/e/HYeAzpuiljD6pBpWHacHb",
+  "2026-07-29": "https://fotoshare.co/e/OuRX4zQy4sGkII5KR7zVH",
+  "2026-07-30": "https://fotoshare.co/e/CJa7gLsdcIXCpqbtPEq0E",
+  "2026-07-31": "https://fotoshare.co/e/nmfTPaWzUOYTllq2XYBJF",
+  "2026-08-01": "https://fotoshare.co/e/U_pgdrkoqYF4jwNB61Hd1",
+  "2026-08-02": "https://fotoshare.co/e/IHnfUFe4h8hDwqBwEFPf8",
+  "2026-08-03": "https://fotoshare.co/e/jPk812Qhjlbj9kowu-4h2",
+  "2026-08-04": "https://fotoshare.co/e/es1i_U5fbnHuf8TD_NFug",
+  "2026-08-05": "https://fotoshare.co/e/DJE-BE9FqCQ4W-lMiBU8U",
+  "2026-08-06": "https://fotoshare.co/e/EQ-9PnuebZKZrxpksFRUP",
+  "2026-08-07": "https://fotoshare.co/e/WflYmOl5iXaJ6lmz0_fFH",
+  "2026-08-08": "https://fotoshare.co/e/jb-COSQesnEg0PAKVGvop",
+  "2026-08-09": "https://fotoshare.co/e/qZXxLVwCRP34W-Zst9_9J",
 };
 
 const santoTomasHighAngleLinks: Record<string, string> = {
@@ -82,6 +96,19 @@ const santoTomasHighAngleLinks: Record<string, string> = {
   "2026-07-24": "https://fotoshare.co/e/SVwcN4bVTGqt45ak0V5wU",
   "2026-07-25": "https://fotoshare.co/e/gZ99zVnv9U3GbAoJrQxuT",
   "2026-07-26": "https://fotoshare.co/e/xDWowegmu_b3xnckwFwoF",
+  "2026-07-27": "https://fotoshare.co/e/_Bazc7zRqpECo1FSibzc7",
+  "2026-07-28": "https://fotoshare.co/e/6lQ43q3EiK1hDDj73d5I-",
+  "2026-07-29": "https://fotoshare.co/e/2MRiUsYtbkTBAX1Iw991K",
+  "2026-07-31": "https://fotoshare.co/e/YnkJaO4k4JXpKSFPOsthx",
+  "2026-08-01": "https://fotoshare.co/e/Z1V6bgmRgLsRb0Y8y69nA",
+  "2026-08-02": "https://fotoshare.co/e/c03brdM9JWsfkVJSvN5N5",
+  "2026-08-03": "https://fotoshare.co/e/rdwFs3DqH_4e0baXdl3jE",
+  "2026-08-04": "https://fotoshare.co/e/mNyKL14ztdrTI4bIQvGJg",
+  "2026-08-05": "https://fotoshare.co/e/pdKba_aoVpT99szvFO_Ip",
+  "2026-08-06": "https://fotoshare.co/e/ncKUvNRt3cbQ6JpudtZwn",
+  "2026-08-07": "https://fotoshare.co/e/psMg3_AxHvuSg6-y0Havs",
+  "2026-08-08": "https://fotoshare.co/e/Pw4RcubYHh1LegE6_9R8M",
+  "2026-08-09": "https://fotoshare.co/e/ZoDhzKbDDrn9hKqz9KZ_e",
 };
 
 const sections: PopUpSection[] = [

@@ -86,6 +86,11 @@ const santoTomasClassicLinks: Record<string, string> = {
   "2026-08-07": "https://fotoshare.co/e/WflYmOl5iXaJ6lmz0_fFH",
   "2026-08-08": "https://fotoshare.co/e/jb-COSQesnEg0PAKVGvop",
   "2026-08-09": "https://fotoshare.co/e/qZXxLVwCRP34W-Zst9_9J",
+  "2026-08-10": "https://fotoshare.co/e/bmZ7MLE5g0VGe8d0vkHxO",
+  "2026-08-11": "https://fotoshare.co/e/szvRg0fMXQdy0EOUXm833",
+  "2026-08-12": "https://fotoshare.co/e/WFQI29zp68-EzsnRFSWmF",
+  "2026-08-13": "https://fotoshare.co/e/kJDbj88cyGjdK2mHhP20z",
+  "2026-08-14": "https://fotoshare.co/e/_VLEpQ0X-bz76oTCpYgrY",
 };
 
 const santoTomasHighAngleLinks: Record<string, string> = {
@@ -109,6 +114,11 @@ const santoTomasHighAngleLinks: Record<string, string> = {
   "2026-08-07": "https://fotoshare.co/e/psMg3_AxHvuSg6-y0Havs",
   "2026-08-08": "https://fotoshare.co/e/Pw4RcubYHh1LegE6_9R8M",
   "2026-08-09": "https://fotoshare.co/e/ZoDhzKbDDrn9hKqz9KZ_e",
+  "2026-08-10": "https://fotoshare.co/e/9xxC_HYycSHRpMjzQ8-AB",
+  "2026-08-11": "https://fotoshare.co/e/9xxC_HYycSHRpMjzQ8-AB",
+  "2026-08-12": "https://fotoshare.co/e/SaqmPuaSH5BKO5ClJKPux",
+  "2026-08-13": "https://fotoshare.co/e/UJEUIVzui8WNH4SjcLOhc",
+  "2026-08-14": "https://fotoshare.co/e/8BZfHKjTMKqCxwYaoyDUQ",
 };
 
 const sections: PopUpSection[] = [

@@ -86,6 +86,11 @@ const santoTomasClassicLinks: Record<string, string> = {
   "2026-08-07": "https://fotoshare.co/e/WflYmOl5iXaJ6lmz0_fFH",
   "2026-08-08": "https://fotoshare.co/e/jb-COSQesnEg0PAKVGvop",
   "2026-08-09": "https://fotoshare.co/e/qZXxLVwCRP34W-Zst9_9J",
+  "2026-08-10": "https://fotoshare.co/e/bmZ7MLE5g0VGe8d0vkHxO",
+  "2026-08-11": "https://fotoshare.co/e/szvRg0fMXQdy0EOUXm833",
+  "2026-08-12": "https://fotoshare.co/e/WFQI29zp68-EzsnRFSWmF",
+  "2026-08-13": "https://fotoshare.co/e/kJDbj88cyGjdK2mHhP20z",
+  "2026-08-14": "https://fotoshare.co/e/_VLEpQ0X-bz76oTCpYgrY",
 };
 
 const santoTomasHighAngleLinks: Record<string, string> = {

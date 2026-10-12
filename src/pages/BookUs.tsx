@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CalendarDays, Upload, X, Image, Loader2, Plus, Minus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { isBlackoutDate, BLACKOUT_NOTICE_LABEL, BLACKOUT_NOTICE_BODY } from "@/lib/bookingBlackout";
 import {
   Select,
   SelectContent,
@@ -143,9 +144,13 @@ const BookUs = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedYMD, availability]);
 
-  const dateUnavailable = selectedYMD ? blockedDateSet.has(selectedYMD) : false;
+  const dateUnavailable = selectedYMD
+    ? blockedDateSet.has(selectedYMD) || isBlackoutDate(selectedYMD)
+    : false;
   const dateUnavailableReason = selectedYMD
-    ? availability?.blockedDates.find((b) => b.date === selectedYMD)?.reason
+    ? isBlackoutDate(selectedYMD)
+      ? "BLACKOUT"
+      : availability?.blockedDates.find((b) => b.date === selectedYMD)?.reason
     : undefined;
 
   const handleThemeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -291,7 +296,7 @@ const BookUs = () => {
                   mode="single"
                   selected={date}
                   onSelect={setDate}
-                  disabled={(d) => d < minDate || blockedDateSet.has(toManilaYMD(d))}
+                  disabled={(d) => d < minDate || blockedDateSet.has(toManilaYMD(d)) || isBlackoutDate(d)}
                   className="pointer-events-auto"
                 />
               </div>
@@ -310,7 +315,11 @@ const BookUs = () => {
               )}
               {date && dateUnavailable && (
                 <p className="text-sm text-destructive mt-2">
-                  {dateUnavailableReason === "FULLY_BOOKED" ? "Fully booked — please choose another date." : "This date is unavailable."}
+                  {dateUnavailableReason === "FULLY_BOOKED"
+                    ? "Fully booked — please choose another date."
+                    : dateUnavailableReason === "BLACKOUT"
+                      ? "We're not accepting private event bookings on this date — please choose another."
+                      : "This date is unavailable."}
                 </p>
               )}
             </div>
@@ -494,6 +503,19 @@ const BookUs = () => {
               PROCEED TO QUOTATION
             </Button>
           </form>
+
+          {/* Blackout notice */}
+          <div
+            role="note"
+            className="mt-8 rounded-lg border-2 border-destructive bg-destructive/15 p-5 md:p-6"
+          >
+            <p className="text-sm md:text-base leading-relaxed text-foreground">
+              <span className="font-heading tracking-widest text-destructive">
+                {BLACKOUT_NOTICE_LABEL.toUpperCase()}
+              </span>{" "}
+              {BLACKOUT_NOTICE_BODY}
+            </p>
+          </div>
         </div>
       </section>
     </Layout>

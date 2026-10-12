@@ -206,6 +206,19 @@ const BookUs = () => {
             Fill out the form below to book your photobooth experience
           </p>
 
+          {/* Blackout notice */}
+          <div
+            role="note"
+            className="mb-6 rounded-lg border-2 border-destructive bg-destructive/15 p-5 md:p-6"
+          >
+            <p className="text-sm md:text-base leading-relaxed text-foreground">
+              <span className="font-heading tracking-widest text-destructive">
+                {BLACKOUT_NOTICE_LABEL.toUpperCase()}
+              </span>{" "}
+              {BLACKOUT_NOTICE_BODY}
+            </p>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-5 bg-card border border-border rounded-lg p-6 md:p-10">
             {/* Name */}
             <div>
@@ -504,18 +517,6 @@ const BookUs = () => {
             </Button>
           </form>
 
-          {/* Blackout notice */}
-          <div
-            role="note"
-            className="mt-8 rounded-lg border-2 border-destructive bg-destructive/15 p-5 md:p-6"
-          >
-            <p className="text-sm md:text-base leading-relaxed text-foreground">
-              <span className="font-heading tracking-widest text-destructive">
-                {BLACKOUT_NOTICE_LABEL.toUpperCase()}
-              </span>{" "}
-              {BLACKOUT_NOTICE_BODY}
-            </p>
-          </div>
         </div>
       </section>
     </Layout>

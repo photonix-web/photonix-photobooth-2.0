@@ -16,6 +16,38 @@ const BOOTH_LIMITS: Record<string, number> = {
   "High-Angle": 2,
 };
 
+// Private-event booking blackout windows (inclusive, Asia/Manila).
+// Kept in sync with src/lib/bookingBlackout.ts.
+const BLACKOUT_RANGES: { start: string; end: string; reason: string }[] = [
+  { start: "2026-10-15", end: "2027-01-15", reason: "BLACKOUT" },
+];
+
+function pad2(n: number) {
+  return n.toString().padStart(2, "0");
+}
+
+// Yields every YYYY-MM-DD from start to end, inclusive, without TZ surprises.
+function* eachYMD(start: string, end: string): Generator<string> {
+  const [y0, m0, d0] = start.split("-").map(Number);
+  const [ey, em, ed] = end.split("-").map(Number);
+  let y = y0;
+  let m = m0;
+  let d = d0;
+  while (y < ey || (y === ey && (m < em || (m === em && d <= ed)))) {
+    yield `${y}-${pad2(m)}-${pad2(d)}`;
+    const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    d += 1;
+    if (d > daysInMonth) {
+      d = 1;
+      m += 1;
+      if (m > 12) {
+        m = 1;
+        y += 1;
+      }
+    }
+  }
+}
+
 interface GCalEvent {
   summary?: string;
   status?: string;
@@ -164,6 +196,18 @@ Deno.serve(async (req) => {
       if (!info.blocked && info.bookingsCount >= MAX_BOOKINGS_PER_DAY) {
         info.blocked = true;
         info.reason = "FULLY_BOOKED";
+      }
+    }
+
+    // Apply blackout windows: no private event bookings accepted in these ranges
+    const windowStart = toManilaDateStr(timeMin);
+    const windowEnd = toManilaDateStr(timeMax);
+    for (const range of BLACKOUT_RANGES) {
+      for (const d of eachYMD(range.start, range.end)) {
+        if (d < windowStart || d > windowEnd) continue;
+        const info = ensure(d);
+        info.blocked = true;
+        info.reason = range.reason;
       }
     }
 

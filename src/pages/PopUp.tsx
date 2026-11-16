@@ -9,6 +9,7 @@ import panaboBg from "@/assets/popup-panabo.jpg";
 import valentinesBg from "@/assets/popup-valentines.jpg";
 import msmeBg from "@/assets/png-msme-26.png";
 import santoTomasBg from "@/assets/png-67stt-26.png";
+import pantukanBg from "@/assets/pantukan-popup.jpg.asset.json";
 
 interface PopUpButton {
   label: string;
@@ -121,7 +122,31 @@ const santoTomasHighAngleLinks: Record<string, string> = {
   "2026-08-14": "https://fotoshare.co/e/8BZfHKjTMKqCxwYaoyDUQ",
 };
 
+const pantukanClassicLinks: Record<string, string> = {
+  "2026-11-09": "https://fotoshare.co/e/OW73I7sDSmiD_h8GT19FO",
+  "2026-11-10": "https://fotoshare.co/e/Ii5rUd_u6aXdL7d3MRvHB",
+  "2026-11-11": "https://fotoshare.co/e/TJ3kR6AvJffQ_sfjANgMV",
+  "2026-11-12": "https://fotoshare.co/e/vEouKP9zWEBKnKMg_2euH",
+  "2026-11-13": "https://fotoshare.co/e/GfCeWr8gq3XZPJjdzYaFu",
+};
+
+const pantukanHighAngleLinks: Record<string, string> = {
+  "2026-11-09": "https://fotoshare.co/e/7cIbKG-eQ_vpLR39gXYCL",
+  "2026-11-10": "https://fotoshare.co/e/Y-bRKWyvM43I1lGcdnCz8",
+  "2026-11-11": "https://fotoshare.co/e/Jdk293k5ogxgg9T6evLSQ",
+  "2026-11-12": "https://fotoshare.co/e/v1-KjEQiKVN6gR9pX_wep",
+  "2026-11-13": "https://fotoshare.co/e/1dTJOrybvV4Pnv96BE6ES",
+};
+
 const sections: PopUpSection[] = [
+  {
+    title: "Pantukan Pop-up",
+    bg: pantukanBg.url,
+    buttons: [
+      { label: "Classic →", dateLinks: pantukanClassicLinks },
+      { label: "High-Angle →", dateLinks: pantukanHighAngleLinks },
+    ],
+  },
   {
     title: "67th Santo Tomas Pop-up",
     bg: santoTomasBg,

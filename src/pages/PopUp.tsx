@@ -10,8 +10,10 @@ import valentinesBg from "@/assets/popup-valentines.jpg";
 import msmeBg from "@/assets/png-msme-26.png";
 import santoTomasBg from "@/assets/png-67stt-26.png";
 import pantukanBg from "@/assets/pantukan-popup.jpg.asset.json";
+import cityHallBg from "@/assets/city-hall-grounds-nov-dec-2026.png.asset.json";
 
 const pantukanBgUrl = new URL(pantukanBg.url, "https://photonixphotobooth.lovable.app").href;
+const cityHallBgUrl = new URL(cityHallBg.url, "https://photonixphotobooth.lovable.app").href;
 
 interface PopUpButton {
   label: string;
@@ -140,7 +142,27 @@ const pantukanHighAngleLinks: Record<string, string> = {
   "2026-11-13": "https://fotoshare.co/e/1dTJOrybvV4Pnv96BE6ES",
 };
 
+const cityHallClassicLinks: Record<string, string> = {
+  "2026-11-19": "https://fotoshare.co/e/DSJtWZDIJOJNAvT-wF7Wy",
+  "2026-11-20": "https://fotoshare.co/e/uOXS2kh2SDiF9jqoozu-7",
+  "2026-11-21": "https://fotoshare.co/e/3N8Xtp6TrwwWUesFFmc4C",
+};
+
+const cityHallHighAngleLinks: Record<string, string> = {
+  "2026-11-19": "https://fotoshare.co/e/C0_gbk6rX0tZTTumXHmr8",
+  "2026-11-20": "https://fotoshare.co/e/gjWzEtLwEcTppGc9QuNh5",
+  "2026-11-21": "https://fotoshare.co/e/gjWzEtLwEcTppGc9QuNh5",
+};
+
 const sections: PopUpSection[] = [
+  {
+    title: "City Hall Grounds Pop-up",
+    bg: cityHallBgUrl,
+    buttons: [
+      { label: "Classic →", dateLinks: cityHallClassicLinks },
+      { label: "High-Angle →", dateLinks: cityHallHighAngleLinks },
+    ],
+  },
   {
     title: "Pantukan Pop-up",
     bg: pantukanBgUrl,

@@ -11,6 +11,8 @@ import msmeBg from "@/assets/png-msme-26.png";
 import santoTomasBg from "@/assets/png-67stt-26.png";
 import pantukanBg from "@/assets/pantukan-popup.jpg.asset.json";
 
+const pantukanBgUrl = new URL(pantukanBg.url, "https://photonixphotobooth.lovable.app").href;
+
 interface PopUpButton {
   label: string;
   href?: string;
@@ -141,7 +143,7 @@ const pantukanHighAngleLinks: Record<string, string> = {
 const sections: PopUpSection[] = [
   {
     title: "Pantukan Pop-up",
-    bg: pantukanBg.url,
+    bg: pantukanBgUrl,
     buttons: [
       { label: "Classic →", dateLinks: pantukanClassicLinks },
       { label: "High-Angle →", dateLinks: pantukanHighAngleLinks },

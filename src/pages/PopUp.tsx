@@ -142,16 +142,18 @@ const pantukanHighAngleLinks: Record<string, string> = {
   "2026-11-13": "https://fotoshare.co/e/1dTJOrybvV4Pnv96BE6ES",
 };
 
-const cityHallClassicLinks: Record<string, string> = {
+export const cityHallClassicLinks: Record<string, string> = {
   "2026-11-19": "https://fotoshare.co/e/DSJtWZDIJOJNAvT-wF7Wy",
   "2026-11-20": "https://fotoshare.co/e/uOXS2kh2SDiF9jqoozu-7",
   "2026-11-21": "https://fotoshare.co/e/3N8Xtp6TrwwWUesFFmc4C",
+  "2026-11-22": "https://fotoshare.co/e/M0QrDYdf2EDrUNPynr0wP",
 };
 
-const cityHallHighAngleLinks: Record<string, string> = {
+export const cityHallHighAngleLinks: Record<string, string> = {
   "2026-11-19": "https://fotoshare.co/e/C0_gbk6rX0tZTTumXHmr8",
   "2026-11-20": "https://fotoshare.co/e/gjWzEtLwEcTppGc9QuNh5",
   "2026-11-21": "https://fotoshare.co/e/gjWzEtLwEcTppGc9QuNh5",
+  "2026-11-22": "https://fotoshare.co/e/CEaUN2u9RneNA-3lChDXd",
 };
 
 const sections: PopUpSection[] = [

@@ -9,4 +9,14 @@ describe("City Hall Grounds pop-up photo links", () => {
   it("opens the High-Angle November 22, 2026 album", () => {
     expect(cityHallHighAngleLinks["2026-11-22"]).toBe("https://fotoshare.co/e/CEaUN2u9RneNA-3lChDXd");
   });
+
+  it("opens the Classic November 23 and 24, 2026 albums", () => {
+    expect(cityHallClassicLinks["2026-11-23"]).toBe("https://fotoshare.co/e/NccXdPV28v4Q7motOJ-ba");
+    expect(cityHallClassicLinks["2026-11-24"]).toBe("https://fotoshare.co/e/xc5n2EJCvSaJnVrVLg5o-");
+  });
+
+  it("opens the High-Angle November 23 and 24, 2026 albums", () => {
+    expect(cityHallHighAngleLinks["2026-11-23"]).toBe("https://fotoshare.co/e/CEaUN2u9RneNA-3lChDXd");
+    expect(cityHallHighAngleLinks["2026-11-24"]).toBe("https://fotoshare.co/e/_zD5qjCMQ3p4B5i3YNwkD");
+  });
 });

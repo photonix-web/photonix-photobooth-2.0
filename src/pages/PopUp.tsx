@@ -147,6 +147,8 @@ export const cityHallClassicLinks: Record<string, string> = {
   "2026-11-20": "https://fotoshare.co/e/uOXS2kh2SDiF9jqoozu-7",
   "2026-11-21": "https://fotoshare.co/e/3N8Xtp6TrwwWUesFFmc4C",
   "2026-11-22": "https://fotoshare.co/e/M0QrDYdf2EDrUNPynr0wP",
+  "2026-11-23": "https://fotoshare.co/e/NccXdPV28v4Q7motOJ-ba",
+  "2026-11-24": "https://fotoshare.co/e/xc5n2EJCvSaJnVrVLg5o-",
 };
 
 export const cityHallHighAngleLinks: Record<string, string> = {
@@ -154,6 +156,8 @@ export const cityHallHighAngleLinks: Record<string, string> = {
   "2026-11-20": "https://fotoshare.co/e/gjWzEtLwEcTppGc9QuNh5",
   "2026-11-21": "https://fotoshare.co/e/gjWzEtLwEcTppGc9QuNh5",
   "2026-11-22": "https://fotoshare.co/e/CEaUN2u9RneNA-3lChDXd",
+  "2026-11-23": "https://fotoshare.co/e/CEaUN2u9RneNA-3lChDXd",
+  "2026-11-24": "https://fotoshare.co/e/_zD5qjCMQ3p4B5i3YNwkD",
 };
 
 const sections: PopUpSection[] = [
